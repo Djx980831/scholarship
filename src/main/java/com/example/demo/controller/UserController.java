@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.UserService;
+import com.example.demo.service.impl.UserServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -22,9 +23,7 @@ public class UserController {
     )
     @RequestMapping(value = "getUser", method = RequestMethod.POST)
     public String GetUser(@RequestBody String id) {
-        System.out.println(id);
-        Integer i = Integer.valueOf(id);
-        return userService.Sel(i).toString();
+       return userService.getUser(id).toString();
     }
 
     @ApiOperation(value = "查询所有用户", notes = "查询所有用户")

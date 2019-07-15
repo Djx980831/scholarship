@@ -28,7 +28,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("maven构建Spring boot项目")
-                .description("maven构建Spring boot项目 集成mybatis使用pagehelper插件")
+                .description("maven构建Spring boot项目")
                 .termsOfServiceUrl("http://blog.csdn.net")
                 .contact("djx")
                 .version("1.0")
