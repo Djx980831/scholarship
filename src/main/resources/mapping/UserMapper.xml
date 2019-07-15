@@ -13,6 +13,10 @@
         select * from user where id = #{id}
     </select>
 
+    <select id="getAllUser" resultType="com.example.demo.entity.User">
+        select * from user
+    </select>
+
     <!--<insert id="insert" parameterType="com.example.entity.User">
         insert into User (userId, userName, phone,
         sex)

@@ -17,4 +17,9 @@ public class UserController {
     public String GetUser(@PathVariable int id){
         return userService.Sel(id).toString();
     }
+
+    @RequestMapping("getAllUser")
+    public String GetAllUser(){
+        return userService.getAllUser().toString();
+    }
 }
