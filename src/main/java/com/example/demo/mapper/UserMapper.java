@@ -12,4 +12,6 @@ public interface UserMapper {
     User getUser(@Param("id") int id);
 
     List<User> getAllUser();
+
+    Integer updateUserById(User user);
 }

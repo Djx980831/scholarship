@@ -17,6 +17,22 @@
         select * from user
     </select>
 
+    <update id="updateUserById" parameterType="user">
+        update user
+        <trim prefix="set" prefixOverrides=",">
+            <if test="userName != null and userName != ''">
+                ,userName = #{userName}
+            </if>
+            <if test="password != null and password != ''">
+                ,password = #{password}
+            </if>
+            <if test="realName != null and realName !=''">
+                ,realName = #{realName}
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
     <!--<insert id="insert" parameterType="com.example.entity.User">
         insert into User (userId, userName, phone,
         sex)

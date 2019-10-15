@@ -21,15 +21,26 @@ public class UserController {
     @ApiImplicitParams(
             @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "int")
     )
-    @RequestMapping(value = "getUser", method = RequestMethod.POST)
-    public String GetUser(@RequestBody String id) {
+    @RequestMapping(value = "/getUser", method = RequestMethod.POST)
+    public String getUser(@RequestBody String id) {
        return userService.getUser(id).toString();
     }
 
     @ApiOperation(value = "查询所有用户", notes = "查询所有用户")
-    @RequestMapping(value = "getAllUser", method = RequestMethod.POST)
-    public String GetAllUser() {
+    @RequestMapping(value = "/getAllUser", method = RequestMethod.POST)
+    public String getAllUser() {
         return userService.getAllUser().toString();
     }
 
+    @ApiOperation(value = "修改用户信息", notes = "修改用户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "userName", value = "用户name", dataType = "string"),
+            @ApiImplicitParam(name = "password", value = "用户password", dataType = "string"),
+            @ApiImplicitParam(name = "realName", value = "用户realName", dataType = "string")
+    })
+    @PostMapping("/updateUserById")
+    public String updateUserById(String id, String userName, String password, String realName){
+        return userService.updateUserById(id, userName, password, realName).toString();
+    }
 }
