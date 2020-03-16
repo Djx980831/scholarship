@@ -16,22 +16,20 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User getUser(String id) {
-        return userMapper.getUser(Integer.valueOf(id));
-    }
-
-    @Override
-    public List<User> getAllUser() {
-       return userMapper.getAllUser();
-    }
-
-    @Override
-    public Integer updateUserById(String id, String userName, String password, String realName) {
+    public void addUser(String studentId, String userName, Integer sex, Integer role, String mobile, String grade, String major, String gradeClass, String password, String question, String answer) {
         User user = new User();
-        user.setId(Integer.valueOf(id));
-        user.setPassword(password);
-        user.setRealName(realName);
+        user.setStudentId(studentId);
         user.setUserName(userName);
-        return userMapper.updateUserById(user);
+        user.setSex(sex);
+        user.setRole(role);
+        user.setMobile(mobile);
+        user.setGrade(grade);
+        user.setMajor(major);
+        user.setGradeClass(gradeClass);
+        user.setPassword(password);
+        user.setQuestion(question);
+        user.setAnswer(answer);
+
+        userMapper.addUser(user);
     }
 }
