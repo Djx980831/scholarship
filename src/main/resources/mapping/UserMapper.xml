@@ -16,11 +16,23 @@
     <insert id="addUser" parameterType="com.example.demo.entity.User">
         insert into user
         values
-        (null, #{studentId}, #{userName}, #{sex}, #{role}, #{mobile}, #{grade}, #{major}, #{gradeClass}, md5(#{password}), #{question}, #{answer})
+        (null, #{studentId}, #{userName}, #{sex}, #{role}, #{mobile}, #{grade}, #{major}, #{gradeClass}, md5(#{password}), #{question}, md5(#{answer}))
     </insert>
 
     <select id="getAllUser" resultType="com.example.demo.entity.User">
         select * from user
+    </select>
+
+    <update id="updatePassword" parameterType="com.example.demo.entity.User">
+        update user set password = md5(#{password}) where studentId = #{studentId}
+    </update>
+
+    <update id="updateQuestion" parameterType="com.example.demo.entity.User">
+        update user set question = #{question}, answer = md5(#{answer}) where studentId = #studentId
+    </update>
+
+    <select id="getUserByMobile" resultType="Integer">
+        select studentId from user where mobile = #{mobile} limit 1
     </select>
 
     <update id="updateUserById" parameterType="user">

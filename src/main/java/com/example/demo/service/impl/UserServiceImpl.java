@@ -32,4 +32,23 @@ public class UserServiceImpl implements UserService {
 
         userMapper.addUser(user);
     }
+
+    @Override
+    public Integer updatePassword(String password, String studentId) {
+        User user = new User();
+        user.setStudentId(studentId);
+        user.setPassword(password);
+
+        return userMapper.updatePassword(user);
+    }
+
+    @Override
+    public Integer updateQuestion(String question, String answer, String studentId) {
+        User user = new User();
+        user.setStudentId(studentId);
+        user.setQuestion(question);
+        user.setAnswer(answer);
+
+        return null;
+    }
 }

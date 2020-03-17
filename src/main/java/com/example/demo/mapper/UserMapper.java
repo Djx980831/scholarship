@@ -10,4 +10,8 @@ import java.util.List;
 public interface UserMapper {
 
     void addUser(User user);
+
+    Integer updatePassword(User user);
+
+    Integer updateQuestion(User user);
 }
