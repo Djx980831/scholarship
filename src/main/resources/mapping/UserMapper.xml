@@ -31,8 +31,22 @@
         update user set question = #{question}, answer = md5(#{answer}) where studentId = #studentId
     </update>
 
-    <select id="getUserByMobile" resultType="Integer">
+    <select id="getUserByMobile" resultType="integer">
         select studentId from user where mobile = #{mobile} limit 1
+    </select>
+
+    <select id="isExistStudentId" resultType="integer">
+        select userId from user where studentId = #{studentId}
+    </select>
+
+    <select id="isExistMobile" resultType="integer">
+        select userId from user where mobile = #{mobile}
+    </select>
+
+    <select id="login" resultType="string">
+        select studentId from user where studentId = #{studentIdOrMobile} or mobile = #{studentIdOrMobile}
+        and
+        password = md5(#{password})
     </select>
 
     <update id="updateUserById" parameterType="user">

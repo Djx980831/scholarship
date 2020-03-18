@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(String studentId, String userName, Integer sex, Integer role, String mobile, String grade, String major, String gradeClass, String password, String question, String answer) {
+
         User user = new User();
         user.setStudentId(studentId);
         user.setUserName(userName);
@@ -34,21 +35,48 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer updatePassword(String password, String studentId) {
+    public String updatePassword(String password, String studentId) {
         User user = new User();
         user.setStudentId(studentId);
         user.setPassword(password);
 
-        return userMapper.updatePassword(user);
+        userMapper.updatePassword(user);
+        return studentId;
     }
 
     @Override
-    public Integer updateQuestion(String question, String answer, String studentId) {
+    public String updateQuestion(String question, String answer, String studentId) {
         User user = new User();
         user.setStudentId(studentId);
         user.setQuestion(question);
         user.setAnswer(answer);
 
-        return null;
+        userMapper.updateQuestion(user);
+        return studentId;
+    }
+
+    @Override
+    public String updateMobileByStudentId(String mobile, String studentId) {
+        User user = new User();
+        user.setMobile(mobile);
+        user.setStudentId(studentId);
+
+        userMapper.updatePassword(user);
+        return studentId;
+    }
+
+    @Override
+    public String login(String studentIdOrMobile, String password) {
+        return userMapper.login(studentIdOrMobile, password);
+    }
+
+    @Override
+    public Integer isExistStudentId(String studenId) {
+        return userMapper.isExistStudentId(studenId);
+    }
+
+    @Override
+    public Integer isExistMobile(String mobile) {
+        return userMapper.isExistMobile(mobile);
     }
 }
