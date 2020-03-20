@@ -17,4 +17,6 @@ public interface UserService {
     Integer isExistStudentId(String studenId);
 
     Integer isExistMobile(String mobile);
+
+    User getUserByStudentIdOrMobile(String studentIdOrMobile);
 }

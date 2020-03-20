@@ -11,13 +11,17 @@ public interface UserMapper {
 
     void addUser(User user);
 
-    String updatePassword(User user);
+    Integer updatePassword(User user);
 
-    String updateQuestion(User user);
+    Integer updateQuestion(User user);
 
     Integer isExistStudentId(String studentId);
 
     Integer isExistMobile(String mobile);
 
     String login(String studentIdOrMobile, String password);
+
+    User getUserByStudentIdOrMobile(String studentIdOrMobile);
+
+    Integer updateMobileByStudentId(User user);
 }

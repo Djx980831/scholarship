@@ -1,11 +1,14 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.ParamUtil;
 import com.example.demo.util.RpcResponse;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 import static com.example.demo.constant.UserConsant.*;
 
@@ -25,13 +28,26 @@ public class UserController {
         if (!ParamUtil.checkNumbers(sex, role)) {
             return RpcResponse.error(PARAM_NOT_ENOUGH);
         }
-
+        User user = userService.getUserByStudentIdOrMobile(studentId);
+        if (user != null) {
+            return RpcResponse.error(STUDENTID_IS_EXIST);
+        }
+        user = userService.getUserByStudentIdOrMobile(mobile);
+        if (user != null) {
+            return RpcResponse.error(MOBILE_IS_EXIST);
+        }
         userService.addUser(studentId, userName, sex, role, mobile, grade, major, gradeClass, password, question, answer);
         return RpcResponse.success(studentId);
     }
 
     @PostMapping("/updatePassword")
     public RpcResponse<String> updatePassword(String password, String studentId) {
+        if (!ParamUtil.checkString(password)) {
+            return RpcResponse.error(PASSWORD_IS_EMPTY);
+        }
+        if (!ParamUtil.checkString(studentId)) {
+            return RpcResponse.error(STUDENTID_IS_EMPTY);
+        }
         userService.updatePassword(password, studentId);
         return RpcResponse.success(studentId);
     }
@@ -66,31 +82,49 @@ public class UserController {
         if (userService.isExistMobile(mobile) != null) {
             return RpcResponse.error(MOBILE_IS_EXIST);
         }
+        userService.updateMobileByStudentId(mobile, studentId);
         return RpcResponse.success(studentId);
     }
 
     @PostMapping("/updateQuestionByStudentId")
     public RpcResponse<String> updateQuestionByStudentId(String question, String answer, String studentId) {
-        if (!ParamUtil.checkString(question, answer)) {
-            return RpcResponse.error(PARAM_NOT_ENOUGH);
+        if (!ParamUtil.checkString(answer)) {
+            return RpcResponse.error(ANSWER_IS_EMPTY);
         }
         userService.updateQuestion(question, answer, studentId);
         return RpcResponse.success(studentId);
     }
 
     @PostMapping("login")
-    public RpcResponse<String> login (String studentIdOrMobile, String password) {
+    public RpcResponse<String> login (String studentIdOrMobile, String password, HttpSession session) {
         if (!ParamUtil.checkString(studentIdOrMobile)) {
             return RpcResponse.error(STUDENTID_OR_MOBILE_IS_EMPTY);
         }
         if (!ParamUtil.checkString(password)) {
             return RpcResponse.error(PASSWORD_IS_EMPTY);
         }
+
         String studentId = userService.login(studentIdOrMobile, password);
         if (studentId == null) {
             return RpcResponse.error(LOGIN_ERROR);
         }
+        session.setAttribute("loginStudentId", studentId);
         return RpcResponse.success(studentId);
+    }
 
+    @PostMapping("/logout")
+    public RpcResponse<String> logout(HttpSession session){
+        String studentId = (String) session.getAttribute("loginStudentId");
+        session.invalidate();
+        return RpcResponse.success(studentId);
+    }
+
+    @PostMapping("/getUserByStudentIdOrMobile")
+    public RpcResponse<User> getUserByStudentIdOrMobile(String studentIdOrMobile) {
+        if (!ParamUtil.checkString(studentIdOrMobile)) {
+            return RpcResponse.error(STUDENTID_OR_MOBILE_IS_EMPTY);
+        }
+        User user = userService.getUserByStudentIdOrMobile(studentIdOrMobile);
+        return RpcResponse.success(user);
     }
 }

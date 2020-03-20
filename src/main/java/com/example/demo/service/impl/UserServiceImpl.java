@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.UserService;
+import com.example.demo.util.ParamUtil;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,7 +62,7 @@ public class UserServiceImpl implements UserService {
         user.setMobile(mobile);
         user.setStudentId(studentId);
 
-        userMapper.updatePassword(user);
+        userMapper.updateMobileByStudentId(user);
         return studentId;
     }
 
@@ -78,5 +79,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer isExistMobile(String mobile) {
         return userMapper.isExistMobile(mobile);
+    }
+
+    @Override
+    public User getUserByStudentIdOrMobile(String studentIdOrMobile) {
+        return userMapper.getUserByStudentIdOrMobile(studentIdOrMobile);
     }
 }

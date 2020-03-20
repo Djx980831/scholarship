@@ -9,14 +9,10 @@
         <result column="realName" jdbcType="VARCHAR" property="realName" />
     </resultMap>
 
-    <select id="getUser" resultType="com.example.demo.entity.User">
-        select * from user where id = #{id}
-    </select>
-
     <insert id="addUser" parameterType="com.example.demo.entity.User">
         insert into user
         values
-        (null, #{studentId}, #{userName}, #{sex}, #{role}, #{mobile}, #{grade}, #{major}, #{gradeClass}, md5(#{password}), #{question}, md5(#{answer}))
+        (null, #{studentId}, #{userName}, #{sex}, #{role}, #{mobile}, #{grade}, #{major}, #{gradeClass}, md5(#{password}), #{question}, md5(#{answer}), now(), now())
     </insert>
 
     <select id="getAllUser" resultType="com.example.demo.entity.User">
@@ -24,11 +20,15 @@
     </select>
 
     <update id="updatePassword" parameterType="com.example.demo.entity.User">
-        update user set password = md5(#{password}) where studentId = #{studentId}
+        update user set password = md5(#{password}), updateTime = now() where studentId = #{studentId}
     </update>
 
     <update id="updateQuestion" parameterType="com.example.demo.entity.User">
-        update user set question = #{question}, answer = md5(#{answer}) where studentId = #studentId
+        update user set question = #{question}, answer = md5(#{answer}), updateTime = now() where studentId = #{studentId}
+    </update>
+
+    <update id="updateMobileByStudentId" parameterType="com.example.demo.entity.User">
+        update user set mobile = #{mobile}, updateTime = now() where studentId = #{studentId};
     </update>
 
     <select id="getUserByMobile" resultType="integer">
@@ -44,9 +44,11 @@
     </select>
 
     <select id="login" resultType="string">
-        select studentId from user where studentId = #{studentIdOrMobile} or mobile = #{studentIdOrMobile}
-        and
-        password = md5(#{password})
+        select studentId from user where password = md5(#{password}) and studentId = #{studentIdOrMobile} or mobile = #{studentIdOrMobile} and password = md5(#{password})
+    </select>
+
+    <select id="getUserByStudentIdOrMobile" resultType="com.example.demo.entity.User">
+        select * from user where studentId = #{studentIdOrMobile} or mobile = #{studentIdOrMobile}
     </select>
 
     <update id="updateUserById" parameterType="user">
