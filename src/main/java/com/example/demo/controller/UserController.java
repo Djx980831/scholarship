@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
-import static com.example.demo.constant.UserConsant.*;
+import static com.example.demo.constant.ErrorConsant.*;
 
 @Api(tags = "用户接口", value = "实现用户的相关操作")
 @RestController

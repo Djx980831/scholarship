@@ -9,11 +9,15 @@ import com.example.demo.util.ErrorInfo;
  * @return
  * @Date 2020-03-17 23:22
  */
-public class UserConsant {
-    private UserConsant(){};
+public class ErrorConsant {
+    private ErrorConsant(){};
 
     public static final Integer SUCCESS_CODE = 0;
 
+
+    /*
+    user错误代码
+     */
     public static final ErrorInfo PARAM_NOT_ENOUGH = new ErrorInfo(100, "缺少参数");
 
     public static final ErrorInfo PARAM_ERROR = new ErrorInfo(101, "参数错误");
@@ -33,4 +37,12 @@ public class UserConsant {
     public static final ErrorInfo LOGIN_ERROR = new ErrorInfo(108, "学号、手机号或密码不正确，请重新输入");
 
     public static final ErrorInfo ANSWER_IS_EMPTY = new ErrorInfo(109, "密保答案为空");
+
+    /*
+    奖学金错误代码
+     */
+    public static final ErrorInfo ID_IS_EMPTY = new ErrorInfo(201, "奖学金id不可为空");
+
+
+    public static final ErrorInfo LIMIT_IS_EMPTY = new ErrorInfo(202, "分页缺少当前页或页面大小");
 }
