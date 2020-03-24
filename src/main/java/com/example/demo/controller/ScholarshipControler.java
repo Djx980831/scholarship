@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Scholarship;
 import com.example.demo.service.ScholarshipService;
 import com.example.demo.util.ParamUtil;
 import com.example.demo.util.RpcResponse;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 
 import static com.example.demo.constant.ErrorConsant.*;
 

@@ -45,4 +45,17 @@ public class ErrorConsant {
 
 
     public static final ErrorInfo LIMIT_IS_EMPTY = new ErrorInfo(202, "分页缺少当前页或页面大小");
+
+    /*
+    公告错误代码
+     */
+    public static final ErrorInfo CREATE_USER_ID_IS_EMPTY = new ErrorInfo(301, "创建者id不可为空");
+
+    public static final ErrorInfo CONTENT_IS_EMPTY = new ErrorInfo(302, "公告内容不可为空");
+
+    public static final ErrorInfo CONTENT_ID_IS_EMPTY = new ErrorInfo(303, "公告id不可为空");
+
+    public static final ErrorInfo CONTENT_LIMIT_IS_EMPTY = new ErrorInfo(304, "分页缺少当前页或页面大小");
+
+    public static final ErrorInfo CONTENT_NOT_EXIST = new ErrorInfo(305, "该公告不存在");
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.NoticeMapper">
+
+    <insert id="addNotice" parameterType="com.example.demo.vo.request.NoticeVORequest" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into notice values (null, #{createUserId}, #{content}, 1, now(), now())
+    </insert>
+
+    <update id="deleteNoticeById" parameterType="integer">
+        update notice set flag = 0, updateTime = now() where id = #{id}
+    </update>
+
+    <select id="getAllNotice" resultType="com.example.demo.entity.Notice">
+        select id, createUserId, content, createTime from notice where flag = 1 limit #{nowPage}, #{pageSize}
+    </select>
+
+    <select id="getNoticeById" resultType="com.example.demo.entity.Notice">
+        select id, createUserId, content, createTime from notice where flag = 1 and id = #{id} limit 1
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from notice where flag = 1
+    </select>
+
+</mapper>
