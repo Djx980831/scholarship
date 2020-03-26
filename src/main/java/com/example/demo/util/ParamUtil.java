@@ -9,6 +9,8 @@ package com.example.demo.util;
  */
 public class ParamUtil {
 
+    public static final String CHECK_STUDENT_ID = "(2)[\\d]{7,9}";
+
     private ParamUtil() {
     }
 
@@ -28,5 +30,12 @@ public class ParamUtil {
             }
         }
         return true;
+    }
+
+    public static boolean checkStudentId(String studentId) {
+        if (studentId.matches(CHECK_STUDENT_ID)) {
+            return true;
+        }
+        return false;
     }
 }

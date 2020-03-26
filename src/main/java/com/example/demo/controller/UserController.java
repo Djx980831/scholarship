@@ -25,6 +25,9 @@ public class UserController {
         if (!ParamUtil.checkString(studentId, userName, mobile, grade, major, gradeClass, password, question, answer)) {
             return RpcResponse.error(PARAM_NOT_ENOUGH);
         }
+        if (!ParamUtil.checkStudentId(studentId)) {
+            return RpcResponse.error(STUDENTID_IS_ERROR);
+        }
         if (!ParamUtil.checkNumbers(sex, role)) {
             return RpcResponse.error(PARAM_NOT_ENOUGH);
         }
@@ -126,5 +129,17 @@ public class UserController {
         }
         User user = userService.getUserByStudentIdOrMobile(studentIdOrMobile);
         return RpcResponse.success(user);
+    }
+
+    @PostMapping("/checkStudentId")
+    public RpcResponse<Boolean> checkStudentId(String studentId) {
+        if (!ParamUtil.checkString(studentId)) {
+            return RpcResponse.error(STUDENTID_IS_EMPTY);
+        }
+        if (!ParamUtil.checkStudentId(studentId)) {
+            return RpcResponse.error(STUDENTID_IS_ERROR);
+        }
+
+        return RpcResponse.success(true);
     }
 }

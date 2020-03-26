@@ -38,6 +38,8 @@ public class ErrorConsant {
 
     public static final ErrorInfo ANSWER_IS_EMPTY = new ErrorInfo(109, "密保答案为空");
 
+    public static final ErrorInfo STUDENTID_IS_ERROR = new ErrorInfo(110, "学号格式不对，学号以2开头的纯数字组成。");
+
     /*
     奖学金错误代码
      */

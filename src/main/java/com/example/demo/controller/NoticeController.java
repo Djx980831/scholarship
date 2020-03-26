@@ -80,6 +80,6 @@ public class NoticeController {
         if (res == null) {
             return RpcResponse.error(CONTENT_NOT_EXIST);
         }
-        return RpcResponse.success(service.updateNoticeByid(id, createUserId, content));
+        return RpcResponse.success(res);
     }
 }
