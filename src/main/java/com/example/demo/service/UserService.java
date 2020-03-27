@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.User;
+import com.example.demo.vo.response.UserVO;
 
 public interface UserService {
 
@@ -12,7 +13,7 @@ public interface UserService {
 
     String updateMobileByStudentId(String mobile, String studentId);
 
-    String login(String studentIdOrMobile, String password);
+    UserVO login(String studentIdOrMobile, String password);
 
     Integer isExistStudentId(String studenId);
 

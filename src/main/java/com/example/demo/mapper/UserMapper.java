@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.entity.User;
+import com.example.demo.vo.response.UserVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,7 @@ public interface UserMapper {
 
     Integer isExistMobile(String mobile);
 
-    String login(String studentIdOrMobile, String password);
+    UserVO login(String studentIdOrMobile, String password);
 
     User getUserByStudentIdOrMobile(String studentIdOrMobile);
 

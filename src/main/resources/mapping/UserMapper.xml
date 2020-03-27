@@ -43,8 +43,8 @@
         select userId from user where mobile = #{mobile}
     </select>
 
-    <select id="login" resultType="string">
-        select studentId from user where password = md5(#{password}) and studentId = #{studentIdOrMobile} or mobile = #{studentIdOrMobile} and password = md5(#{password})
+    <select id="login" resultType="com.example.demo.vo.response.UserVO">
+        select id, studentId, userName, grade, major, gradeClass from user where password = md5(#{password}) and studentId = #{studentIdOrMobile} or mobile = #{studentIdOrMobile} and password = md5(#{password})
     </select>
 
     <select id="getUserByStudentIdOrMobile" resultType="com.example.demo.entity.User">

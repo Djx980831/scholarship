@@ -4,10 +4,12 @@ import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.ParamUtil;
 import com.example.demo.util.RpcResponse;
+import com.example.demo.vo.response.UserVO;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import static com.example.demo.constant.ErrorConsant.*;
@@ -107,19 +109,36 @@ public class UserController {
             return RpcResponse.error(PASSWORD_IS_EMPTY);
         }
 
-        String studentId = userService.login(studentIdOrMobile, password);
-        if (studentId == null) {
+        UserVO userVO = userService.login(studentIdOrMobile, password);
+        if (userVO == null) {
             return RpcResponse.error(LOGIN_ERROR);
         }
-        session.setAttribute("loginStudentId", studentId);
-        return RpcResponse.success(studentId);
+        session.setAttribute("userVO", userVO);
+
+        Cookie studentId = new Cookie("studentId", userVO.getStudentId());
+        Cookie userName = new Cookie("userName", userVO.getUserName());
+        Cookie grade = new Cookie("grade", userVO.getGrade());
+        Cookie major = new Cookie("major", userVO.getMajor());
+        Cookie gradeClass = new Cookie("gradeClass", userVO.getGradeClass());
+
+        return RpcResponse.success(userVO.getStudentId());
     }
 
     @PostMapping("/logout")
     public RpcResponse<String> logout(HttpSession session){
-        String studentId = (String) session.getAttribute("loginStudentId");
+        UserVO userVO = (UserVO) session.getAttribute("userVO");
         session.invalidate();
-        return RpcResponse.success(studentId);
+        Cookie studentId = new Cookie("studentId", null);
+        studentId.setMaxAge(0);
+        Cookie userName = new Cookie("userName", null);
+        userName.setMaxAge(0);
+        Cookie grade = new Cookie("grade", null);
+        grade.setMaxAge(0);
+        Cookie major = new Cookie("major", null);
+        major.setMaxAge(0);
+        Cookie gradeClass = new Cookie("gradeClass", null);
+        gradeClass.setMaxAge(0);
+        return RpcResponse.success(userVO.getStudentId());
     }
 
     @PostMapping("/getUserByStudentIdOrMobile")

@@ -4,6 +4,7 @@ import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.UserService;
 import com.example.demo.util.ParamUtil;
+import com.example.demo.vo.response.UserVO;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,7 +68,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(String studentIdOrMobile, String password) {
+    public UserVO login(String studentIdOrMobile, String password) {
         return userMapper.login(studentIdOrMobile, password);
     }
 

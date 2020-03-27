@@ -15,6 +15,7 @@ public class ScholarshipApply {
     private String studentId;
     private String grade;
     private String major;
+    private String gradeClass;
     private String userName;
     private String type;
     private Double jiaQuan;
