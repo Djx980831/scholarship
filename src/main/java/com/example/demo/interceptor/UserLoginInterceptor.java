@@ -24,10 +24,11 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 
         HttpSession session = request.getSession(true);
         UserVO userVO = (UserVO) session.getAttribute("userVO");
-        if (null != userVO) {//已登录
+        if (null != userVO) { //已登录
             return true;
         } else {//未登录
             //直接重定向到登录页面
+            // todo 指定跳转页
             response.sendRedirect(request.getContextPath() + "/wechatplatformuser/loginRBAC.html");
             return false;
         }

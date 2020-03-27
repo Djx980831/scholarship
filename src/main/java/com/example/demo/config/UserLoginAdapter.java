@@ -27,6 +27,7 @@ public class UserLoginAdapter implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
+        // todo 排除指定路径的文件
         //添加对用户是否登录的拦截器，并添加过滤项、排除项
         registry.addInterceptor(userLoginInterceptor).addPathPatterns("/**")
                 .excludePathPatterns("/css/**", "/js/**", "/images/**")//排除样式、脚本、图片等资源文件
