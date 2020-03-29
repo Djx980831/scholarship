@@ -60,4 +60,19 @@ public class ErrorConsant {
     public static final ErrorInfo CONTENT_LIMIT_IS_EMPTY = new ErrorInfo(304, "分页缺少当前页或页面大小");
 
     public static final ErrorInfo CONTENT_NOT_EXIST = new ErrorInfo(305, "该公告不存在");
+
+    /*
+    申请奖学金错误代码
+     */
+    public static final ErrorInfo APPLY_PARAM_NOT_ENOUGH = new ErrorInfo(401, "申请奖学金参数不完整，请补充完全再提交申请");
+
+    public static final ErrorInfo APPLY_LIMIT_NOT_ENOUGH = new ErrorInfo(402, "缺少分页参数");
+
+    public static final ErrorInfo APPLY_SORT_NOT_ENOUGH = new ErrorInfo(403, "缺少默认排序参数");
+
+    public static final ErrorInfo APPLY_NOT_EXIST = new ErrorInfo(404, "该申请id不存在");
+
+    public static final ErrorInfo APPLY_ID_IS_EMPTY = new ErrorInfo(405, "申请id为空");
+
+    public static final ErrorInfo APPLY_STUDENT_ID_IS_EMPTY = new ErrorInfo(405, "学生id为空");
 }

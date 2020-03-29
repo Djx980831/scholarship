@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ScholarshipApplyMapper">
+
+    <insert id="addApply" parameterType="com.example.demo.entity.ScholarshipApply" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into scholarshipApply values (null, #{studentId}, #{grade}, #{major}, #{gradeClass}, #{userName}, #{type}, 1, #{jiaQuan},
+        #{zongHe}, #{caoXing}, #{jiaQuanClassRank}, #{jiaquanMajorRank}, #{zongHeClassRank}, #{description})
+    </insert>
+
+    <select id="getApplyIdByStudentIdAndCtime" parameterType="string" resultType="integer">
+        select id from scholarshipapply where flag = 1 and studentId = #{studentId} and (select left(createTime, 4)) = #{time}
+    </select>
+
+    <select id="getStudentIdById" resultType="string">
+        select studentId from scholarshipApply where flag = 1 and id = #{id}
+    </select>
+
+    <select id="getApplyList" parameterType="com.example.demo.vo.request.ScholarshipApplyVORequest" resultType="com.example.demo.entity.ScholarshipApply">
+        select studentId, grade, major, gradeClass, userName, type, jiaQuan, zongHe, caoXing, jiaQuanClassRank, jiaquanMajorRank,
+        zongHeClassRank, description from scholarshipApply where flag = 1
+        <if test="studentId != null and studentId != ''">
+            and studentId = #{studentId}
+        </if>
+        <if test="grade != null and grade != ''">
+            and grade = #{grade}
+        </if>
+        <if test="major != null and major !=''">
+            and major = #{major}
+        </if>
+        <if test="gradeClass != null and gradeClass !=''">
+            and gradeClass = #{gradeClass}
+        </if>
+        <if test="userName != null and userName !=''">
+            and userName = #{userName}
+        </if>
+        <if test="type != null and type !=''">
+            and type = #{type}
+        </if>
+        <if test="time != null and time != ''">
+            and (select left (createTime, 4)) = #{time}
+        </if>
+        order by ${sortKind} desc
+        limit #{nowPage}, #{pageSize}
+    </select>
+
+   <update id="deleteApplyById" parameterType="integer">
+       update scholarshipApply set flag = 0, updateTime = now()
+       where id = #{id}
+   </update>
+
+    <select id="getCount" parameterType="int">
+        select count(*) from scholarshipApply where flag = 1
+        <if test="studentId != null and studentId != ''">
+            and studentId = #{studentId}
+        </if>
+        <if test="grade != null and grade != ''">
+            and grade = #{grade}
+        </if>
+        <if test="major != null and major !=''">
+            and major = #{major}
+        </if>
+        <if test="gradeClass != null and gradeClass !=''">
+            and gradeClass = #{gradeClass}
+        </if>
+        <if test="userName != null and userName !=''">
+            and userName = #{userName}
+        </if>
+        <if test="type != null and type !=''">
+            and type = #{type}
+        </if>
+        <if test="time != null and time != ''">
+            and (select left (createTime, 4)) = #{time}
+        </if>
+    </select>
+
+    <select id="getApplyById" parameterType="integer" resultType="com.example.demo.entity.ScholarshipApply">
+        select studentId, grade, major, gradeClass, userName, type, jiaQuan, zongHe, caoXing, jiaQuanClassRank, jiaquanMajorRank,
+        zongHeClassRank, description from scholarshipApply where flag = 1 and id = #{id}
+    </select>
+
+</mapper>

@@ -18,6 +18,7 @@ public class ScholarshipApply {
     private String gradeClass;
     private String userName;
     private String type;
+    private Integer flag;
     private Double jiaQuan;
     private Double zongHe;
     private String caoXing;

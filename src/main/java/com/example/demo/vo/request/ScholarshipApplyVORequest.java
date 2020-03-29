@@ -11,5 +11,15 @@ import lombok.Data;
  */
 @Data
 public class ScholarshipApplyVORequest {
-
+    private Integer id;
+    private String studentId;
+    private String grade;
+    private String major;
+    private String gradeClass;
+    private String userName;
+    private String type;
+    private String time;
+    private String sortKind;
+    private Integer nowPage;
+    private Integer pageSize;
 }

@@ -23,6 +23,15 @@ public class ParamUtil {
         return true;
     }
 
+    public static boolean checkDouble(Double... numbers) {
+        for (Double number : numbers) {
+            if (number == null || number == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static boolean checkString(String... strings) {
         for (String string : strings) {
             if (string == null || string.isEmpty()) {
