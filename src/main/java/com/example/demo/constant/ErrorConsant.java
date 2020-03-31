@@ -75,4 +75,14 @@ public class ErrorConsant {
     public static final ErrorInfo APPLY_ID_IS_EMPTY = new ErrorInfo(405, "申请id为空");
 
     public static final ErrorInfo APPLY_STUDENT_ID_IS_EMPTY = new ErrorInfo(405, "学生id为空");
+
+    /*
+    留言板错误代码
+     */
+
+    public static final ErrorInfo COMMENT_IS_EMPTY = new ErrorInfo(501, "留言内容不可为空");
+
+    public static final ErrorInfo COMMENT_ID_IS_EMPTY = new ErrorInfo(502, "留言id不可为空");
+
+    public static final ErrorInfo COMMENT_LIMIT_NOT_ENOUGH = new ErrorInfo(503, "缺少分页参数");
 }

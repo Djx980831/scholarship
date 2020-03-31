@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CommentMapper">
+
+    <insert id="addComment" parameterType="com.example.demo.vo.request.CommentVORequest" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into comment values (null, #{userName}, #{comment}, now(), 1, null, null, null)
+    </insert>
+
+    <update id="updateComment" parameterType="com.example.demo.vo.request.CommentVORequest">
+        update comment set replyTime = now()
+        <if test="replyUserName != null and replyUserName != ''">
+            , replyUserName = #{replyUserName}
+        </if>
+        <if test="reply != null and reply != ''">
+            , reply = #{reply}
+        </if>
+        <if test="flag != null and flag != ''">
+            , flag = #{flag}
+        </if>
+         where id = #{id}
+    </update>
+
+    <select id="getAllComment" parameterType="com.example.demo.vo.request.CommentVORequest" resultType="com.example.demo.entity.Comment">
+        select * from comment where flag = 1
+        limit #{nowPage}, #{pageSize}
+    </select>
+
+    <select id="getCommentById" parameterType="integer" resultType="com.example.demo.entity.Comment">
+        select * from comment where flag = 1 and id = #{id}
+    </select>
+
+    <select id="getCount" resultType="integer">
+        select count(*) from comment where flag = 1
+    </select>
+</mapper>
