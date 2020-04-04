@@ -26,9 +26,9 @@ public class ScholarshipApplyController {
     @Autowired
     private ScholarshipApplyService service;
 
-    @PostMapping("/adApply")
+    @PostMapping("/addApply")
     public RpcResponse<Integer> addApply(String studentId, String grade, String major, String gradeClass, String userName, String type, Double jiaQuan, Double zongHe, String caoXing, String jiaQuanClassRank, String jiaquanMajorRank, String zongHeClassRank, String description) {
-        if (!ParamUtil.checkString(studentId, grade, major, gradeClass, userName, type, caoXing, jiaQuanClassRank, jiaquanMajorRank, zongHeClassRank, description)) {
+        if (!ParamUtil.checkString(studentId, grade, major, gradeClass, userName, type, caoXing, jiaQuanClassRank, jiaquanMajorRank, zongHeClassRank)) {
             return RpcResponse.error(APPLY_PARAM_NOT_ENOUGH);
         }
         if (!ParamUtil.checkDouble(jiaQuan, zongHe)) {
@@ -53,10 +53,11 @@ public class ScholarshipApplyController {
         if (!ParamUtil.checkNumbers(id)) {
             return RpcResponse.error(APPLY_ID_IS_EMPTY);
         }
-        if (service.deleteApplyById(id) == null) {
+        Integer res = service.deleteApplyById(id);
+        if (res  == null) {
             return RpcResponse.error(APPLY_NOT_EXIST);
         }
-        return RpcResponse.success(service.deleteApplyById(id));
+        return RpcResponse.success(res);
     }
 
     @PostMapping("/getApplyIdByStudentIdAndCtime")
@@ -80,7 +81,11 @@ public class ScholarshipApplyController {
         if (!ParamUtil.checkNumbers(id)) {
             return RpcResponse.error(APPLY_ID_IS_EMPTY);
         }
-        return RpcResponse.success(service.getApplyById(id));
+        ScholarshipApply apply = service.getApplyById(id);
+        if (apply == null) {
+            return RpcResponse.error(APPLY_NOT_EXIST);
+        }
+        return RpcResponse.success(apply);
     }
 
     @PostMapping("/updateApplyById")

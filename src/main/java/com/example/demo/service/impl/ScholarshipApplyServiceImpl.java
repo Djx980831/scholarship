@@ -44,7 +44,8 @@ public class ScholarshipApplyServiceImpl implements ScholarshipApplyService {
         apply.setZongHeClassRank(zongHeClassRank);
         apply.setDescription(description);
 
-        return  mapper.addApply(apply);
+        mapper.addApply(apply);
+        return  apply.getId();
     }
 
     @Override
@@ -76,7 +77,7 @@ public class ScholarshipApplyServiceImpl implements ScholarshipApplyService {
         request.setUserName(userName);
         request.setType(type);
         request.setTime(time);
-        request.setNowPage(nowPage);
+        request.setNowPage(nowPage - 1);
         request.setPageSize(pageSize);
 
         List<ScholarshipApply> applyList = mapper.getApplyList(request);
@@ -93,6 +94,7 @@ public class ScholarshipApplyServiceImpl implements ScholarshipApplyService {
             vo.setUserName(apply.getUserName());
             vo.setType(apply.getType());
             vo.setFlag(apply.getFlag());
+            vo.setCaoXing(apply.getCaoXing());
             vo.setJiaQuan(apply.getJiaQuan());
             vo.setZongHe(apply.getZongHe());
             vo.setJiaQuanClassRank(apply.getJiaQuanClassRank());
@@ -117,7 +119,8 @@ public class ScholarshipApplyServiceImpl implements ScholarshipApplyService {
         if (studentId == null) {
             return null;
         }
-        return mapper.deleteApplyById(id);
+        mapper.deleteApplyById(id);
+        return id;
     }
 
     @Override
@@ -159,6 +162,8 @@ public class ScholarshipApplyServiceImpl implements ScholarshipApplyService {
         apply.setJiaquanMajorRank(jiaquanMajorRank);
         apply.setZongHeClassRank(zongHeClassRank);
         apply.setDescription(description);
-        return mapper.addApply(apply);
+        mapper.addApply(apply);
+
+        return apply.getId();
     }
 }

@@ -4,7 +4,7 @@
 
     <insert id="addApply" parameterType="com.example.demo.entity.ScholarshipApply" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into scholarshipApply values (null, #{studentId}, #{grade}, #{major}, #{gradeClass}, #{userName}, #{type}, 1, #{jiaQuan},
-        #{zongHe}, #{caoXing}, #{jiaQuanClassRank}, #{jiaquanMajorRank}, #{zongHeClassRank}, #{description})
+        #{zongHe}, #{caoXing}, #{jiaQuanClassRank}, #{jiaquanMajorRank}, #{zongHeClassRank}, #{description}, now(), now())
     </insert>
 
     <select id="getApplyIdByStudentIdAndCtime" parameterType="string" resultType="integer">
@@ -16,7 +16,7 @@
     </select>
 
     <select id="getApplyList" parameterType="com.example.demo.vo.request.ScholarshipApplyVORequest" resultType="com.example.demo.entity.ScholarshipApply">
-        select studentId, grade, major, gradeClass, userName, type, jiaQuan, zongHe, caoXing, jiaQuanClassRank, jiaquanMajorRank,
+        select id, studentId, grade, major, gradeClass, userName, type, jiaQuan, zongHe, caoXing, jiaQuanClassRank, jiaquanMajorRank,
         zongHeClassRank, description from scholarshipApply where flag = 1
         <if test="studentId != null and studentId != ''">
             and studentId = #{studentId}
@@ -48,7 +48,7 @@
        where id = #{id}
    </update>
 
-    <select id="getCount" parameterType="int">
+    <select id="getCount" resultType="integer">
         select count(*) from scholarshipApply where flag = 1
         <if test="studentId != null and studentId != ''">
             and studentId = #{studentId}
@@ -74,7 +74,7 @@
     </select>
 
     <select id="getApplyById" parameterType="integer" resultType="com.example.demo.entity.ScholarshipApply">
-        select studentId, grade, major, gradeClass, userName, type, jiaQuan, zongHe, caoXing, jiaQuanClassRank, jiaquanMajorRank,
+        select id, studentId, grade, major, gradeClass, userName, type, jiaQuan, zongHe, caoXing, jiaQuanClassRank, jiaquanMajorRank,
         zongHeClassRank, description from scholarshipApply where flag = 1 and id = #{id}
     </select>
 
