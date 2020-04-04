@@ -19,4 +19,6 @@ public interface ScholarshipMapper {
     Integer getCount();
 
     Integer updateScholarshipById(ScholarshipVORequest scholarshipVORequest);
+
+    Scholarship getScholarshipbyId(Integer id);
 }

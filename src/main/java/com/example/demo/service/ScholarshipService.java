@@ -12,4 +12,6 @@ public interface ScholarshipService {
     ScholarshipVO getAllScholarship(Integer nowPage, Integer pageSize);
 
     Integer updateScholarshipById(Integer id, String name, Integer money, Integer count, String classCount, String description);
+
+    ScholarshipVO.ScholarshipVo getScholarshipbyId(Integer id);
 }

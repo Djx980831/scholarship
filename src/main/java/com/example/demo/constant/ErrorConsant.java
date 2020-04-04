@@ -40,13 +40,16 @@ public class ErrorConsant {
 
     public static final ErrorInfo STUDENTID_IS_ERROR = new ErrorInfo(110, "学号格式不对，学号以2开头的纯数字组成。");
 
+    public static final ErrorInfo USER_MOBILE_IS_EXIST = new ErrorInfo(111, "手机号已存在，请重新输入。");
+
     /*
     奖学金错误代码
      */
     public static final ErrorInfo ID_IS_EMPTY = new ErrorInfo(201, "奖学金id不可为空");
 
-
     public static final ErrorInfo LIMIT_IS_EMPTY = new ErrorInfo(202, "分页缺少当前页或页面大小");
+
+    public static final ErrorInfo SCHOLARSHIP_ID_NOT_EXIST = new ErrorInfo(203, "该奖学金不存在");
 
     /*
     公告错误代码

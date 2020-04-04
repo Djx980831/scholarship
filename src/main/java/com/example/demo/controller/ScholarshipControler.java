@@ -43,6 +43,9 @@ public class ScholarshipControler {
         if (!ParamUtil.checkNumbers(id)) {
             return RpcResponse.error(ID_IS_EMPTY);
         }
+        if (service.getScholarshipbyId(id) == null) {
+            return RpcResponse.error(SCHOLARSHIP_ID_NOT_EXIST);
+        }
 
         return RpcResponse.success(service.deleteScholarship(id));
     }
@@ -64,5 +67,16 @@ public class ScholarshipControler {
             return RpcResponse.error(PARAM_NOT_ENOUGH);
         }
         return RpcResponse.success(service.updateScholarshipById(id, name, money, count, classCount, description));
+    }
+
+    @PostMapping("/getScholarshipbyId")
+    public RpcResponse<ScholarshipVO.ScholarshipVo> getScholarshipbyId(Integer id) {
+        if (!ParamUtil.checkNumbers(id)) {
+            return RpcResponse.error(ID_IS_EMPTY);
+        }
+        if (service.getScholarshipbyId(id) == null) {
+            return RpcResponse.error(SCHOLARSHIP_ID_NOT_EXIST);
+        }
+        return RpcResponse.success(service.getScholarshipbyId(id));
     }
 }

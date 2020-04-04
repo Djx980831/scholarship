@@ -84,4 +84,20 @@ public class ScholarshipServiceImpl implements ScholarshipService {
         return id;
     }
 
+    @Override
+    public ScholarshipVO.ScholarshipVo getScholarshipbyId(Integer id) {
+        Scholarship scholarship = mapper.getScholarshipbyId(id);
+        if (scholarship == null) {
+            return null;
+        }
+        ScholarshipVO.ScholarshipVo vo = new ScholarshipVO.ScholarshipVo();
+        vo.setId(scholarship.getId());
+        vo.setName(scholarship.getName());
+        vo.setMoney(scholarship.getMoney());
+        vo.setCount(scholarship.getCount());
+        vo.setClassCount(scholarship.getClassCount());
+        vo.setDescription(scholarship.getDescription());
+
+        return vo;
+    }
 }
