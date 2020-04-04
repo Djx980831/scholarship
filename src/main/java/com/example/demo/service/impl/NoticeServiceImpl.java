@@ -38,7 +38,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public Integer deleteNoticeById(Integer id) {
-        NoticeVO noticeVO = getNoticeById(id);
+        NoticeVO.NoticeVo noticeVO = getNoticeById(id);
         if (noticeVO == null) {
             return null;
         }
@@ -58,7 +58,7 @@ public class NoticeServiceImpl implements NoticeService {
             NoticeVO.NoticeVo vo = new NoticeVO.NoticeVo();
             vo.setId(notice.getId());
             vo.setContent(notice.getContent());
-            vo.setCreateUserId(notice.getCreateUserId());
+            vo.setCreateTime(notice.getCreateTime().toString().substring(0,10));
 
             noticeVoList.add(vo);
         }
@@ -70,28 +70,18 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public NoticeVO getNoticeById(Integer id) {
+    public NoticeVO.NoticeVo getNoticeById(Integer id) {
         Notice notice = mapper.getNoticeById(id);
         if (notice == null) {
             return null;
         }
 
-        NoticeVO noticeVO = new NoticeVO();
-        List<NoticeVO.NoticeVo> noticeVoList = new ArrayList<>(1);
-
         NoticeVO.NoticeVo vo = new NoticeVO.NoticeVo();
-        vo.setCreateUserId(notice.getCreateUserId());
         vo.setContent(notice.getContent());
+        vo.setCreateTime(notice.getCreateTime().toString().substring(0,10));
         vo.setId(notice.getId());
 
-        noticeVoList.add(vo);
-
-        PageInfo pageInfo = new PageInfo(1, 1, 1);
-
-        noticeVO.setNoticeVoList(noticeVoList);
-        noticeVO.setPageInfo(pageInfo);
-
-        return noticeVO;
+        return vo;
     }
 
     @Override

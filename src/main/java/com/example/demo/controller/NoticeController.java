@@ -42,6 +42,10 @@ public class NoticeController {
         if (!ParamUtil.checkNumbers(id)) {
             return RpcResponse.error(CONTENT_ID_IS_EMPTY);
         }
+        NoticeVO.NoticeVo noticeVO = service.getNoticeById(id);
+        if (noticeVO == null) {
+            return RpcResponse.error(CONTENT_NOT_EXIST);
+        }
         return RpcResponse.success(service.deleteNoticeById(id));
     }
 
@@ -54,11 +58,11 @@ public class NoticeController {
     }
 
     @PostMapping("/getNoticeById")
-    public RpcResponse<NoticeVO> getNoticeById(Integer id) {
+    public RpcResponse<NoticeVO.NoticeVo> getNoticeById(Integer id) {
         if (!ParamUtil.checkNumbers(id)) {
             return RpcResponse.error(CONTENT_ID_IS_EMPTY);
         }
-        NoticeVO noticeVO = service.getNoticeById(id);
+        NoticeVO.NoticeVo noticeVO = service.getNoticeById(id);
         if (noticeVO == null) {
             return RpcResponse.error(CONTENT_NOT_EXIST);
         }

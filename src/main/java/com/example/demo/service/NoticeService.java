@@ -10,7 +10,7 @@ public interface NoticeService {
 
     NoticeVO getAllNotice(Integer nowPage, Integer pageSize);
 
-    NoticeVO getNoticeById(Integer id);
+    NoticeVO.NoticeVo getNoticeById(Integer id);
 
     Integer updateNoticeByid(Integer id, Integer createUserId, String content);
 }

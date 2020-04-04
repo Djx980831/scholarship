@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import lombok.Data;
 
+import java.sql.Timestamp;
+
 /**
  * @param
  * @Description TODO
@@ -14,5 +16,6 @@ public class Notice {
     private Integer id;
     private Integer createUserId;
     private String content;
+    private Timestamp createTime;
     private Integer flag;
 }

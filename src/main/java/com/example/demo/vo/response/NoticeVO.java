@@ -3,6 +3,7 @@ package com.example.demo.vo.response;
 import com.example.demo.util.PageInfo;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class NoticeVO {
     @Data
     public static class NoticeVo{
         private Integer id;
-        private Integer createUserId;
         private String content;
+        private String createTime;
     }
 }

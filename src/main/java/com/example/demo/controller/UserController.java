@@ -6,6 +6,9 @@ import com.example.demo.util.ParamUtil;
 import com.example.demo.util.RpcResponse;
 import com.example.demo.vo.response.UserVO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +24,20 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
+    @ApiOperation(value = "根据id查询用户", notes = "根据id查询用户")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "studentId", value = "学号", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "userName", value = "姓名", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "sex", value = "性别", required = true, dataType = "int"),
+            @ApiImplicitParam(name = "role", value = "角色", required = true, dataType = "int"),
+            @ApiImplicitParam(name = "mobile", value = "电话", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "grade", value = "年级", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "major", value = "专业", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "gradeClass", value = "班级", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "question", value = "密保问题", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "answer", value = "密保答案", required = true, dataType = "string")
+    })
     @PostMapping("/addUser")
     public RpcResponse<String> addUser(String studentId, String userName, Integer sex, Integer role, String mobile, String grade, String major, String gradeClass, String password, String question, String answer) {
         if (!ParamUtil.checkString(studentId, userName, mobile, grade, major, gradeClass, password, question, answer)) {
@@ -85,7 +101,7 @@ public class UserController {
             return RpcResponse.error(MOBILE_IS_EMPTY);
         }
         if (userService.isExistMobile(mobile) != null) {
-            return RpcResponse.error(MOBILE_IS_EXIST);
+            return RpcResponse.error(USER_MOBILE_IS_EXIST);
         }
         userService.updateMobileByStudentId(mobile, studentId);
         return RpcResponse.success(studentId);
@@ -150,6 +166,10 @@ public class UserController {
         return RpcResponse.success(user);
     }
 
+    @ApiOperation(value = "根据id查询用户", notes = "根据id查询用户")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "studentId", value = "学号", required = true, dataType = "string")
+    })
     @PostMapping("/checkStudentId")
     public RpcResponse<Boolean> checkStudentId(String studentId) {
         if (!ParamUtil.checkString(studentId)) {
