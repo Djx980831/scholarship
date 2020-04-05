@@ -47,13 +47,21 @@ public class CommentController {
         if (!ParamUtil.checkNumbers(nowPage, pageSize)) {
             return RpcResponse.error(COMMENT_LIMIT_NOT_ENOUGH);
         }
+        CommentVO vo = service.getAllComment(nowPage, pageSize);
+        if (vo == null) {
+            return RpcResponse.error(COMMENT_IS_ALL_EMPTY);
+        }
         return RpcResponse.success(service.getAllComment(nowPage, pageSize));
     }
 
     @PostMapping("/getCommentById")
-    public RpcResponse<Comment> getCommentById(Integer id) {
+    public RpcResponse<CommentVO.CommentVo> getCommentById(Integer id) {
         if (!ParamUtil.checkNumbers(id)) {
             return RpcResponse.error(COMMENT_ID_IS_EMPTY);
+        }
+        CommentVO.CommentVo vo = service.getCommentById(id);
+        if (vo == null) {
+            return RpcResponse.error(COMMENT_IS_NOT_EXIST);
         }
         return RpcResponse.success(service.getCommentById(id));
     }

@@ -24,10 +24,10 @@ public class CommentVO {
         private Integer id;
         private String userName;
         private String comment;
-        private Timestamp createTime;
+        private String createTime;
         private Integer flag;
         private String reply;
         private String replyUserName;
-        private Timestamp replyTime;
+        private String replyTime;
     }
 }

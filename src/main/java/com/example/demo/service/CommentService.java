@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Comment;
 import com.example.demo.vo.response.CommentVO;
 
 public interface CommentService {
@@ -11,7 +10,7 @@ public interface CommentService {
 
     CommentVO getAllComment(Integer nowPage, Integer pageSize);
 
-    Comment getCommentById(Integer id);
+    CommentVO.CommentVo getCommentById(Integer id);
 
     Integer getCount();
 }

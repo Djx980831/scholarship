@@ -31,7 +31,8 @@ public class CommentServiceImpl implements CommentService {
         request.setComment(comment);
         request.setUserName(userName);
 
-        return mapper.addComment(request);
+        mapper.addComment(request);
+        return request.getId();
     }
 
     @Override
@@ -49,7 +50,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentVO getAllComment(Integer nowPage, Integer pageSize) {
         CommentVORequest request = new CommentVORequest();
-        request.setNowPage(nowPage);
+        request.setNowPage(nowPage - 1);
         request.setPageSize(pageSize);
 
         List<Comment> commentList = mapper.getAllComment(request);
@@ -62,10 +63,11 @@ public class CommentServiceImpl implements CommentService {
             CommentVO.CommentVo vo = new CommentVO.CommentVo();
             vo.setUserName(comment.getUserName());
             vo.setComment(comment.getComment());
-            vo.setCreateTime(comment.getCreateTime());
+            vo.setId(comment.getId());
+            vo.setCreateTime(comment.getCreateTime().toString().substring(0, 10));
             if (comment.getReply() != null) {
                 vo.setReplyUserName(comment.getReplyUserName());
-                vo.setReplyTime(comment.getReplyTime());
+                vo.setReplyTime(comment.getReplyTime().toString().substring(0, 10));
                 vo.setReply(comment.getReply());
             }
 
@@ -83,8 +85,23 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment getCommentById(Integer id) {
-        return mapper.getCommentById(id);
+    public CommentVO.CommentVo getCommentById(Integer id) {
+        Comment comment = mapper.getCommentById(id);
+        if (comment == null) {
+            return null;
+        }
+        CommentVO.CommentVo vo = new CommentVO.CommentVo();
+        vo.setUserName(comment.getUserName());
+        vo.setComment(comment.getComment());
+        vo.setId(comment.getId());
+        vo.setCreateTime(comment.getCreateTime().toString().substring(0, 10));
+        if (comment.getReply() != null) {
+            vo.setReplyUserName(comment.getReplyUserName());
+            vo.setReplyTime(comment.getReplyTime().toString().substring(0, 10));
+            vo.setReply(comment.getReply());
+        }
+
+        return vo;
     }
 
     @Override

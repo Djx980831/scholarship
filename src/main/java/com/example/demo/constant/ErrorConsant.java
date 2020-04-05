@@ -88,4 +88,8 @@ public class ErrorConsant {
     public static final ErrorInfo COMMENT_ID_IS_EMPTY = new ErrorInfo(502, "留言id不可为空");
 
     public static final ErrorInfo COMMENT_LIMIT_NOT_ENOUGH = new ErrorInfo(503, "缺少分页参数");
+
+    public static final ErrorInfo COMMENT_IS_NOT_EXIST= new ErrorInfo(504, "该留言不存在");
+
+    public static final ErrorInfo COMMENT_IS_ALL_EMPTY= new ErrorInfo(504, "没有任何留言");
 }

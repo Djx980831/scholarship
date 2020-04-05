@@ -136,6 +136,7 @@ public class UserController {
         Cookie grade = new Cookie("grade", userVO.getGrade());
         Cookie major = new Cookie("major", userVO.getMajor());
         Cookie gradeClass = new Cookie("gradeClass", userVO.getGradeClass());
+        Cookie role = new Cookie("role", userVO.getRole().toString());
 
         return RpcResponse.success(userVO.getStudentId());
     }
@@ -154,6 +155,8 @@ public class UserController {
         major.setMaxAge(0);
         Cookie gradeClass = new Cookie("gradeClass", null);
         gradeClass.setMaxAge(0);
+        Cookie role = new Cookie("role", null);
+        role.setMaxAge(0);
         return RpcResponse.success(userVO.getStudentId());
     }
 
