@@ -42,6 +42,10 @@ public class ErrorConsant {
 
     public static final ErrorInfo USER_MOBILE_IS_EXIST = new ErrorInfo(111, "手机号已存在，请重新输入。");
 
+    public static final ErrorInfo USER_YANZHENGMA_IS_EMPTY = new ErrorInfo(112, "验证码为空。");
+
+    public static final ErrorInfo USER_YANZHENGMA_IS_ERROR = new ErrorInfo(113, "验证码输入错误。。");
+
     /*
     奖学金错误代码
      */

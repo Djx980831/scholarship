@@ -5,6 +5,7 @@ import com.example.demo.service.UserService;
 import com.example.demo.util.ParamUtil;
 import com.example.demo.util.RpcResponse;
 import com.example.demo.vo.response.UserVO;
+import com.google.code.kaptcha.Producer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -12,8 +13,14 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.OutputStream;
 
 import static com.example.demo.constant.ErrorConsant.*;
 
@@ -24,6 +31,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private Producer kaptchaProducer;
+
     @ApiOperation(value = "根据id查询用户", notes = "根据id查询用户")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "studentId", value = "学号", required = true, dataType = "string"),
@@ -117,14 +128,19 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public RpcResponse<String> login (String studentIdOrMobile, String password, HttpSession session) {
+    public RpcResponse<String> login (String studentIdOrMobile, String password, String kaptcha,  HttpSession session) {
         if (!ParamUtil.checkString(studentIdOrMobile)) {
             return RpcResponse.error(STUDENTID_OR_MOBILE_IS_EMPTY);
         }
         if (!ParamUtil.checkString(password)) {
             return RpcResponse.error(PASSWORD_IS_EMPTY);
         }
-
+        if (!ParamUtil.checkString(kaptcha)) {
+            return RpcResponse.error(USER_YANZHENGMA_IS_EMPTY);
+        }
+        if (!session.getAttribute("kaptcha").equals(kaptcha)) {
+            return RpcResponse.error(USER_YANZHENGMA_IS_ERROR) ;
+        }
         UserVO userVO = userService.login(studentIdOrMobile, password);
         if (userVO == null) {
             return RpcResponse.error(LOGIN_ERROR);
@@ -183,5 +199,24 @@ public class UserController {
         }
 
         return RpcResponse.success(true);
+    }
+
+    @GetMapping("/getKaptcha")
+    public void getKaptcha(HttpServletResponse response, HttpSession session) {
+        // 生成验证码
+        String text = kaptchaProducer.createText();
+        BufferedImage image = kaptchaProducer.createImage(text);
+
+        // 将验证码存入session
+        session.setAttribute("kaptcha", text);
+
+        // 将突图片输出给浏览器
+        response.setContentType("image/png");
+        try {
+            OutputStream os = response.getOutputStream();
+            ImageIO.write(image, "png", os);
+        } catch (IOException e) {
+            System.out.println("响应验证码失败:" + e.getMessage());
+        }
     }
 }
