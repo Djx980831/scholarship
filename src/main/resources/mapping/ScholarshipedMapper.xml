@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ScholarshipedMapper">
+
+    <insert id="addList" parameterType="integer" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO scholarshiped ( applyId, studentId, userName, YEAR, grade, major, gradeClass, type, jiaQuan, zongHe, caoXing, flag ) SELECT
+        id,
+        studentId,
+        userName,
+        ( SELECT LEFT ( createTime, 4 ) ) AS YEAR,
+        grade,
+        major,
+        gradeClass,
+        type,
+        jiaQuan,
+        zongHe,
+        caoXing,
+        flag
+        FROM
+	        scholarshipApply
+        WHERE
+	        flag = 1
+	        AND id IN
+        <foreach  item="ids" collection="array" index="index"  open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </insert>
+
+
+    <update id="updateList" parameterType="integer" >
+        update scholarshiped set createTime = now()
+        where id in
+        <foreach  item="ids" collection="array" index="index"  open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </update>
+
+    <delete id="deleteList" parameterType="integer">
+        delete from scholarshiped where id in
+        <foreach  item="ids" collection="array" index="index"  open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <select id="getList" parameterType="com.example.demo.vo.request.ScholarshipedRequestVO" resultType="com.example.demo.entity.Scholarshiped">
+        select id, applyId, studentId, userName, year, grade, major, gradeClass, type, jiaQuan, zongHe, caoXing from scholarshiped
+        <where>
+            <if test="year != null and year != ''">
+                year = #{year}
+            </if>
+            <if test="grade != null and grade != ''">
+                , grade = #{grade}
+            </if>
+            <if test="major != null and major != ''">
+                , major = #{major}
+            </if>
+        </where>
+        order by ${sortKind} desc
+        limit #{nowPage}, #{pageSize}
+    </select>
+
+    <select id="getCount" parameterType="com.example.demo.vo.request.ScholarshipedRequestVO" resultType="integer">
+        select count(*) from scholarshiped
+        <where>
+            <if test="year != null and year != ''">
+                year = #{year}
+            </if>
+            <if test="grade != null and grade != ''">
+                , grade = #{grade}
+            </if>
+            <if test="major != null and major != ''">
+                , major = #{major}
+            </if>
+        </where>
+    </select>
+
+    <select id="checkId" resultType="integer">
+        select applyId from scholarshiped where applyId = #{id} limit 1
+    </select>
+
+    <select id="getIdByApplyId" resultType="integer">
+        select id from scholarshiped where applyId in
+        <foreach  item="ids" collection="array" index="index"  open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </select>
+</mapper>

@@ -96,4 +96,13 @@ public class ErrorConsant {
     public static final ErrorInfo COMMENT_IS_NOT_EXIST= new ErrorInfo(504, "该留言不存在");
 
     public static final ErrorInfo COMMENT_IS_ALL_EMPTY= new ErrorInfo(504, "没有任何留言");
+
+    /*
+    奖学金错误代码
+     */
+
+    public static final ErrorInfo ED_IDS_IS_EMPTY = new ErrorInfo(601, "未选中任何申请条目。");
+
+    public static final ErrorInfo ED_APPLY_IS_EXIST = new ErrorInfo(602, "重复添加");
+
 }
