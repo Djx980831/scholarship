@@ -15,4 +15,6 @@ public interface ScholarshipedService {
     Integer checkId(Integer id);
 
     List<Integer> getIdByApplyId(Integer[] ids);
+
+    ScholarshipedVO getScholarshipedList(String type, String grade, String sortKind, Integer nowPage, Integer pageSize);
 }

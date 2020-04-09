@@ -105,4 +105,6 @@ public class ErrorConsant {
 
     public static final ErrorInfo ED_APPLY_IS_EXIST = new ErrorInfo(602, "重复添加");
 
+    public static final ErrorInfo ED_PARAM_IS_NOT_ENOUGH = new ErrorInfo(603, "缺少奖学金类型或年级");
+
 }

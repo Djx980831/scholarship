@@ -70,5 +70,20 @@ public class ScholarshipedController {
 
         return RpcResponse.success(service.getList(year, grade, major, type, sortKind, nowPage, pageSize));
     }
+
+    @PostMapping("/getScholarshipedList")
+    public RpcResponse<ScholarshipedVO> getScholarshipedList(String type, String grade, String sortKind, Integer nowPage, Integer pageSize) {
+        if (!ParamUtil.checkNumbers(nowPage, pageSize)) {
+            return RpcResponse.error(COMMENT_LIMIT_NOT_ENOUGH);
+        }
+        if (!ParamUtil.checkString(sortKind)) {
+            return RpcResponse.error(APPLY_SORT_NOT_ENOUGH);
+        }
+        if (!ParamUtil.checkString(type, grade)) {
+            return RpcResponse.error(ED_PARAM_IS_NOT_ENOUGH);
+        }
+
+        return RpcResponse.success(service.getScholarshipedList(type, grade, sortKind, nowPage, pageSize));
+    }
 }
 

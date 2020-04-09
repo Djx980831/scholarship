@@ -22,4 +22,6 @@ public interface ScholarshipedMapper {
     Integer checkId(Integer id);
 
     List<Integer> getIdByApplyId(Integer[] ids);
+
+    List<Scholarshiped> getScholarshipedList(ScholarshipedRequestVO vo);
 }

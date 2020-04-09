@@ -66,10 +66,13 @@
                 year = #{year}
             </if>
             <if test="grade != null and grade != ''">
-                , grade = #{grade}
+                and grade = #{grade}
             </if>
             <if test="major != null and major != ''">
-                , major = #{major}
+                and major = #{major}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
             </if>
         </where>
     </select>
@@ -83,5 +86,13 @@
         <foreach  item="ids" collection="array" index="index"  open="(" separator="," close=")">
             #{ids}
         </foreach>
+    </select>
+
+    <select id="getScholarshipedList" resultType="com.example.demo.entity.Scholarshiped">
+        select id, applyId, studentId, userName, year, grade, major, gradeClass, type, jiaQuan, zongHe, caoXing
+        from scholarshiped
+        where year = #{year} and type = #{type} and grade = #{grade}
+        order by ${sortKind} desc
+        limit #{nowPage}, #{pageSize}
     </select>
 </mapper>
