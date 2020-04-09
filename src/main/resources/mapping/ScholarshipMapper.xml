@@ -35,4 +35,8 @@
         updateTime = now()
         where id = #{id}
     </update>
+
+    <select id="getScholarshipDescriptionById" resultType="string">
+        select description from scholarship where flag = 1 and id = #{id}
+    </select>
 </mapper>

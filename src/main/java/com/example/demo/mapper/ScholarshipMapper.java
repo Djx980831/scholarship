@@ -21,4 +21,6 @@ public interface ScholarshipMapper {
     Integer updateScholarshipById(ScholarshipVORequest scholarshipVORequest);
 
     Scholarship getScholarshipbyId(Integer id);
+
+    String getScholarshipDescriptionById(Integer id);
 }

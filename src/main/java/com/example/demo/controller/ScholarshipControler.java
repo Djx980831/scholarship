@@ -79,4 +79,12 @@ public class ScholarshipControler {
         }
         return RpcResponse.success(service.getScholarshipbyId(id));
     }
+
+    @PostMapping("/getScholarshipDescriptionById")
+    public RpcResponse<String> getScholarshipDescriptionById(Integer id) {
+        if (!ParamUtil.checkNumbers(id)) {
+            return RpcResponse.error(ID_IS_EMPTY);
+        }
+        return RpcResponse.success(service.getScholarshipDescriptionById(id));
+    }
 }

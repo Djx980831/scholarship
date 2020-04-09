@@ -100,4 +100,9 @@ public class ScholarshipServiceImpl implements ScholarshipService {
 
         return vo;
     }
+
+    @Override
+    public String getScholarshipDescriptionById(Integer id) {
+        return mapper.getScholarshipDescriptionById(id);
+    }
 }
