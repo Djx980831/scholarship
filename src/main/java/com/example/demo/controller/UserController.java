@@ -146,7 +146,7 @@ public class UserController {
             return RpcResponse.error(LOGIN_ERROR);
         }
         session.setAttribute("userVO", userVO);
-
+        Cookie id = new Cookie("id", userVO.getId().toString());
         Cookie studentId = new Cookie("studentId", userVO.getStudentId());
         Cookie userName = new Cookie("userName", userVO.getUserName());
         Cookie grade = new Cookie("grade", userVO.getGrade());
