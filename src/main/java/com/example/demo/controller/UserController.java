@@ -127,32 +127,47 @@ public class UserController {
         return RpcResponse.success(studentId);
     }
 
-    @PostMapping("login")
-    public RpcResponse<String> login (String studentIdOrMobile, String password, String kaptcha,  HttpSession session) {
+    @PostMapping("/login")
+    public RpcResponse<String> login (String studentIdOrMobile, String password,  HttpSession session, HttpServletResponse response) {
         if (!ParamUtil.checkString(studentIdOrMobile)) {
             return RpcResponse.error(STUDENTID_OR_MOBILE_IS_EMPTY);
         }
         if (!ParamUtil.checkString(password)) {
             return RpcResponse.error(PASSWORD_IS_EMPTY);
         }
-        if (!ParamUtil.checkString(kaptcha)) {
-            return RpcResponse.error(USER_YANZHENGMA_IS_EMPTY);
-        }
-        if (!session.getAttribute("kaptcha").equals(kaptcha)) {
-            return RpcResponse.error(USER_YANZHENGMA_IS_ERROR) ;
-        }
+
         UserVO userVO = userService.login(studentIdOrMobile, password);
         if (userVO == null) {
             return RpcResponse.error(LOGIN_ERROR);
         }
         session.setAttribute("userVO", userVO);
         Cookie id = new Cookie("id", userVO.getId().toString());
+        id.setMaxAge(24 * 60 * 60);
+        response.addCookie(id);
+
         Cookie studentId = new Cookie("studentId", userVO.getStudentId());
+        studentId.setMaxAge(24 * 60 * 60);
+        response.addCookie(studentId);
+
         Cookie userName = new Cookie("userName", userVO.getUserName());
+        userName.setMaxAge(24 * 60 * 60);
+        response.addCookie(userName);
+
         Cookie grade = new Cookie("grade", userVO.getGrade());
+        grade.setMaxAge(24 * 60 * 60);
+        response.addCookie(grade);
+
         Cookie major = new Cookie("major", userVO.getMajor());
+        major.setMaxAge(24 * 60 * 60);
+        response.addCookie(major);
+
         Cookie gradeClass = new Cookie("gradeClass", userVO.getGradeClass());
+        gradeClass.setMaxAge(24 * 60 * 60);
+        response.addCookie(gradeClass);
+
         Cookie role = new Cookie("role", userVO.getRole().toString());
+        role.setMaxAge(24 * 60 * 60);
+        response.addCookie(role);
 
         return RpcResponse.success(userVO.getStudentId());
     }
