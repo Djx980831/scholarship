@@ -85,11 +85,18 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public Integer updateNoticeByid(Integer id, Integer createUserId, String content) {
-        Integer res = deleteNoticeById(id);
-        if (res == null) {
+    public Integer updateNoticeById(Integer id, Integer createUserId, String content) {
+       Notice notice = mapper.getNoticeById(id);
+        if (notice == null) {
             return null;
         }
-        return addNotice(createUserId, content);
+
+        NoticeVORequest request = new NoticeVORequest();
+        request.setId(id);
+        request.setContent(content);
+        request.setCreateUserId(createUserId);
+
+        mapper.updateNoticeById(request);
+        return id;
     }
 }

@@ -19,4 +19,6 @@ public interface NoticeMapper {
     List<Notice> getAllNotice(@RequestParam("nowPage") Integer nowPage, @RequestParam("pageSize") Integer pageSize);
 
     Notice getNoticeById(Integer id);
+
+    Integer updateNoticeById(NoticeVORequest noticeVORequest);
 }

@@ -142,30 +142,37 @@ public class UserController {
         }
         session.setAttribute("userVO", userVO);
         Cookie id = new Cookie("id", userVO.getId().toString());
+        id.setPath("/");
         id.setMaxAge(24 * 60 * 60);
         response.addCookie(id);
 
         Cookie studentId = new Cookie("studentId", userVO.getStudentId());
+        studentId.setPath("/");
         studentId.setMaxAge(24 * 60 * 60);
         response.addCookie(studentId);
 
         Cookie userName = new Cookie("userName", userVO.getUserName());
+        userName.setPath("/");
         userName.setMaxAge(24 * 60 * 60);
         response.addCookie(userName);
 
         Cookie grade = new Cookie("grade", userVO.getGrade());
+        grade.setPath("/");
         grade.setMaxAge(24 * 60 * 60);
         response.addCookie(grade);
 
         Cookie major = new Cookie("major", userVO.getMajor());
+        major.setPath("/");
         major.setMaxAge(24 * 60 * 60);
         response.addCookie(major);
 
         Cookie gradeClass = new Cookie("gradeClass", userVO.getGradeClass());
+        gradeClass.setPath("/");
         gradeClass.setMaxAge(24 * 60 * 60);
         response.addCookie(gradeClass);
 
         Cookie role = new Cookie("role", userVO.getRole().toString());
+        role.setPath("/");
         role.setMaxAge(24 * 60 * 60);
         response.addCookie(role);
 
@@ -173,21 +180,43 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public RpcResponse<String> logout(HttpSession session){
+    public RpcResponse<String> logout(HttpSession session, HttpServletResponse response){
         UserVO userVO = (UserVO) session.getAttribute("userVO");
         session.invalidate();
-        Cookie studentId = new Cookie("studentId", null);
+        Cookie id = new Cookie("id", userVO.getId().toString());
+        id.setMaxAge(0);
+        id.setPath("/");
+        response.addCookie(id);
+
+        Cookie studentId = new Cookie("studentId", userVO.getStudentId());
         studentId.setMaxAge(0);
-        Cookie userName = new Cookie("userName", null);
+        studentId.setPath("/");
+        response.addCookie(studentId);
+
+        Cookie userName = new Cookie("userName", userVO.getUserName());
         userName.setMaxAge(0);
-        Cookie grade = new Cookie("grade", null);
+        userName.setPath("/");
+        response.addCookie(userName);
+
+        Cookie grade = new Cookie("grade", userVO.getGrade());
         grade.setMaxAge(0);
-        Cookie major = new Cookie("major", null);
+        grade.setPath("/");
+        response.addCookie(grade);
+
+        Cookie major = new Cookie("major", userVO.getMajor());
         major.setMaxAge(0);
-        Cookie gradeClass = new Cookie("gradeClass", null);
+        major.setPath("/");
+        response.addCookie(major);
+
+        Cookie gradeClass = new Cookie("gradeClass", userVO.getGradeClass());
         gradeClass.setMaxAge(0);
-        Cookie role = new Cookie("role", null);
+        gradeClass.setPath("/");
+        response.addCookie(gradeClass);
+
+        Cookie role = new Cookie("role", userVO.getRole().toString());
         role.setMaxAge(0);
+        role.setPath("/");
+        response.addCookie(role);
         return RpcResponse.success(userVO.getStudentId());
     }
 

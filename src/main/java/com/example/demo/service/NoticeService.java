@@ -12,5 +12,5 @@ public interface NoticeService {
 
     NoticeVO.NoticeVo getNoticeById(Integer id);
 
-    Integer updateNoticeByid(Integer id, Integer createUserId, String content);
+    Integer updateNoticeById(Integer id, Integer createUserId, String content);
 }

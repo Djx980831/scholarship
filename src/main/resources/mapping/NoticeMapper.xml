@@ -22,4 +22,8 @@
         select count(*) from notice where flag = 1
     </select>
 
+    <update id="updateNoticeById" parameterType="com.example.demo.vo.request.NoticeVORequest">
+        update notice set createUserId = #{createUserId}, content = #{content}, updateTime = now()
+        where id = #{id}
+    </update>
 </mapper>

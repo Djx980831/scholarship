@@ -69,8 +69,8 @@ public class NoticeController {
         return RpcResponse.success(service.getNoticeById(id));
     }
 
-    @PostMapping("/updateNoticeByid")
-    public RpcResponse<Integer> updateNoticeByid(Integer id, Integer createUserId, String content) {
+    @PostMapping("/updateNoticeById")
+    public RpcResponse<Integer> updateNoticeById(Integer id, Integer createUserId, String content) {
         if (!ParamUtil.checkNumbers(id)) {
             return RpcResponse.error(CONTENT_ID_IS_EMPTY);
         }
@@ -80,7 +80,7 @@ public class NoticeController {
         if (!ParamUtil.checkString(content)) {
             return RpcResponse.error(CONTENT_IS_EMPTY);
         }
-        Integer res = service.updateNoticeByid(id, createUserId, content);
+        Integer res = service.updateNoticeById(id, createUserId, content);
         if (res == null) {
             return RpcResponse.error(CONTENT_NOT_EXIST);
         }
