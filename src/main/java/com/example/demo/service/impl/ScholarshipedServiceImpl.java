@@ -45,10 +45,11 @@ public class ScholarshipedServiceImpl implements ScholarshipedService {
     }
 
     @Override
-    public ScholarshipedVO getList(String year, String grade, String major, String type, String sortKind, Integer nowPage, Integer pageSize) {
+    public ScholarshipedVO getList(String studentId, String year, String grade, String major, String type, String sortKind, Integer nowPage, Integer pageSize) {
         ScholarshipedVO scholarshipedVO = new ScholarshipedVO();
 
         ScholarshipedRequestVO request = new ScholarshipedRequestVO();
+        request.setStudentId(studentId);
         request.setYear(year);
         request.setGrade(grade);
         request.setMajor(major);

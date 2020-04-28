@@ -10,7 +10,7 @@ public interface ScholarshipedService {
 
     Integer[] deleteList(Integer[] ids);
 
-    ScholarshipedVO getList(String year, String grade, String major, String type, String sortKind, Integer nowPage, Integer pageSize);
+    ScholarshipedVO getList(String studentId, String year, String grade, String major, String type, String sortKind, Integer nowPage, Integer pageSize);
 
     Integer checkId(Integer id);
 

@@ -11,6 +11,7 @@ import lombok.Data;
  */
 @Data
 public class ScholarshipedRequestVO {
+    private String studentId;
     private String year;
     private String grade;
     private String major;

@@ -45,14 +45,20 @@
     <select id="getList" parameterType="com.example.demo.vo.request.ScholarshipedRequestVO" resultType="com.example.demo.entity.Scholarshiped">
         select id, applyId, studentId, userName, year, grade, major, gradeClass, type, jiaQuan, zongHe, caoXing from scholarshiped
         <where>
+            <if test="studentId != null and studentId != ''">
+                studentId = #{studentId}
+            </if>
             <if test="year != null and year != ''">
-                year = #{year}
+                , year = #{year}
             </if>
             <if test="grade != null and grade != ''">
                 , grade = #{grade}
             </if>
             <if test="major != null and major != ''">
                 , major = #{major}
+            </if>
+            <if test="type != null and type != ''">
+                , type = #{type}
             </if>
         </where>
         order by ${sortKind} desc
@@ -62,8 +68,11 @@
     <select id="getCount" parameterType="com.example.demo.vo.request.ScholarshipedRequestVO" resultType="integer">
         select count(*) from scholarshiped
         <where>
+            <if test="studentId != null and studentId != ''">
+                studentId = #{studentId}
+            </if>
             <if test="year != null and year != ''">
-                year = #{year}
+                , year = #{year}
             </if>
             <if test="grade != null and grade != ''">
                 and grade = #{grade}
