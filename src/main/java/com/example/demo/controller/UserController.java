@@ -120,6 +120,12 @@ public class UserController {
 
     @PostMapping("/updateQuestionByStudentId")
     public RpcResponse<String> updateQuestionByStudentId(String question, String answer, String studentId) {
+        if (!ParamUtil.checkString(studentId)) {
+            return RpcResponse.error(STUDENTID_IS_EMPTY);
+        }
+        if (!ParamUtil.checkString(question)) {
+            return RpcResponse.error(QUESTION_IS_EMPTY);
+        }
         if (!ParamUtil.checkString(answer)) {
             return RpcResponse.error(ANSWER_IS_EMPTY);
         }
@@ -262,5 +268,31 @@ public class UserController {
         } catch (IOException e) {
             System.out.println("响应验证码失败:" + e.getMessage());
         }
+    }
+
+    @PostMapping("/getQuestionByStudentId")
+    public RpcResponse<String> getQuestionByStudentId(String studentId) {
+        if (!ParamUtil.checkString(studentId)) {
+            return RpcResponse.error(STUDENTID_IS_EMPTY);
+        }
+
+        return RpcResponse.success(userService.getQuestionByStudentId(studentId));
+    }
+
+    @PostMapping("/getAnswerByStudentId")
+    public RpcResponse<String> getAnswerByStudentId(String studentId, String answer) {
+        if (!ParamUtil.checkString(studentId)) {
+            return RpcResponse.error(STUDENTID_IS_EMPTY);
+        }
+        if (!ParamUtil.checkString(answer)) {
+            return RpcResponse.error(ANSWER_IS_EMPTY);
+        }
+
+        String id = userService.getAnswerByStudentId(studentId, answer);
+        if (id == null) {
+            return RpcResponse.error(ANSWER_IS_ERROR);
+        }
+
+        return RpcResponse.success(id);
     }
 }

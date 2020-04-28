@@ -46,6 +46,10 @@ public class ErrorConsant {
 
     public static final ErrorInfo USER_YANZHENGMA_IS_ERROR = new ErrorInfo(113, "验证码输入错误。。");
 
+    public static final ErrorInfo ANSWER_IS_ERROR = new ErrorInfo(114, "密保答案错误");
+
+    public static final ErrorInfo QUESTION_IS_EMPTY = new ErrorInfo(115, "密保问题为空");
+
     /*
     奖学金错误代码
      */

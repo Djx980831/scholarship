@@ -20,4 +20,8 @@ public interface UserService {
     Integer isExistMobile(String mobile);
 
     User getUserByStudentIdOrMobile(String studentIdOrMobile);
+
+    String getQuestionByStudentId(String studentId);
+
+    String getAnswerByStudentId(String studentId, String answer);
 }

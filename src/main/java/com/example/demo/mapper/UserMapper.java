@@ -25,4 +25,8 @@ public interface UserMapper {
     User getUserByStudentIdOrMobile(String studentIdOrMobile);
 
     Integer updateMobileByStudentId(User user);
+
+    String getQuestionByStudentId(String studentId);
+
+    String getAnswerByStudentId(String studentId, String answer);
 }

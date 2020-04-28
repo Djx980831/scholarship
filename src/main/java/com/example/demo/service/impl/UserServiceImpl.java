@@ -86,4 +86,14 @@ public class UserServiceImpl implements UserService {
     public User getUserByStudentIdOrMobile(String studentIdOrMobile) {
         return userMapper.getUserByStudentIdOrMobile(studentIdOrMobile);
     }
+
+    @Override
+    public String getQuestionByStudentId(String studentId) {
+        return userMapper.getQuestionByStudentId(studentId);
+    }
+
+    @Override
+    public String getAnswerByStudentId(String studentId, String answer) {
+        return userMapper.getAnswerByStudentId(studentId, answer);
+    }
 }

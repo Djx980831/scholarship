@@ -36,7 +36,7 @@
     </select>
 
     <select id="isExistStudentId" resultType="integer">
-        select userId from user where studentId = #{studentId}
+        select id from user where studentId = #{studentId}
     </select>
 
     <select id="isExistMobile" resultType="integer">
@@ -67,7 +67,13 @@
         where id = #{id}
     </update>
 
+    <select id="getQuestionByStudentId" resultType="string">
+        select question from user where studentId = #{studentId}
+    </select>
 
+    <select id="getAnswerByStudentId" resultType="string">
+        select studentId from user where studentId = #{studentId} and answer = md5(#{answer})
+    </select>
 
     <!--<insert id="insert" parameterType="com.example.entity.User">
         insert into User (userId, userName, phone,
