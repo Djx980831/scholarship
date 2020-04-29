@@ -60,14 +60,7 @@ public class UserController {
         if (!ParamUtil.checkNumbers(sex, role)) {
             return RpcResponse.error(PARAM_NOT_ENOUGH);
         }
-        User user = userService.getUserByStudentIdOrMobile(studentId);
-        if (user != null) {
-            return RpcResponse.error(STUDENTID_IS_EXIST);
-        }
-        user = userService.getUserByStudentIdOrMobile(mobile);
-        if (user != null) {
-            return RpcResponse.error(MOBILE_IS_EXIST);
-        }
+
         userService.addUser(studentId, userName, sex, role, mobile, grade, major, gradeClass, password, question, answer);
         return RpcResponse.success(studentId);
     }

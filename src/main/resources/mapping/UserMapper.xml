@@ -12,7 +12,7 @@
     <insert id="addUser" parameterType="com.example.demo.entity.User">
         insert into user
         values
-        (null, #{studentId}, #{userName}, #{sex}, #{role}, #{mobile}, #{grade}, #{major}, #{gradeClass}, md5(#{password}), #{question}, md5(#{answer}), now(), now())
+        (null, #{studentId}, #{userName}, #{sex}, #{role}, #{mobile}, #{grade}, #{major}, #{gradeClass}, #{password}, #{question}, #{answer}, now(), now())
     </insert>
 
     <select id="getAllUser" resultType="com.example.demo.entity.User">
@@ -20,11 +20,11 @@
     </select>
 
     <update id="updatePassword" parameterType="com.example.demo.entity.User">
-        update user set password = md5(#{password}), updateTime = now() where studentId = #{studentId}
+        update user set password = #{password}, updateTime = now() where studentId = #{studentId}
     </update>
 
     <update id="updateQuestion" parameterType="com.example.demo.entity.User">
-        update user set question = #{question}, answer = md5(#{answer}), updateTime = now() where studentId = #{studentId}
+        update user set question = #{question}, answer = #{answer}, updateTime = now() where studentId = #{studentId}
     </update>
 
     <update id="updateMobileByStudentId" parameterType="com.example.demo.entity.User">
@@ -44,7 +44,7 @@
     </select>
 
     <select id="login" resultType="com.example.demo.vo.response.UserVO">
-        select id, studentId, userName, grade, major, gradeClass, role from user where password = md5(#{password}) and studentId = #{studentIdOrMobile} or mobile = #{studentIdOrMobile} and password = md5(#{password})
+        select id, studentId, userName, grade, major, gradeClass, role from user where password = #{password} and studentId = #{studentIdOrMobile} or mobile = #{studentIdOrMobile} and password = #{password}
     </select>
 
     <select id="getUserByStudentIdOrMobile" resultType="com.example.demo.entity.User">
@@ -72,7 +72,7 @@
     </select>
 
     <select id="getAnswerByStudentId" resultType="string">
-        select studentId from user where studentId = #{studentId} and answer = md5(#{answer})
+        select studentId from user where studentId = #{studentId} and answer = #{answer}
     </select>
 
     <!--<insert id="insert" parameterType="com.example.entity.User">
