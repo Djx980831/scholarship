@@ -49,16 +49,16 @@
                 studentId = #{studentId}
             </if>
             <if test="year != null and year != ''">
-                , year = #{year}
+                and year = #{year}
             </if>
             <if test="grade != null and grade != ''">
-                , grade = #{grade}
+                and grade = #{grade}
             </if>
             <if test="major != null and major != ''">
-                , major = #{major}
+                and major = #{major}
             </if>
             <if test="type != null and type != ''">
-                , type = #{type}
+                and type = #{type}
             </if>
         </where>
         order by ${sortKind} desc
@@ -72,7 +72,7 @@
                 studentId = #{studentId}
             </if>
             <if test="year != null and year != ''">
-                , year = #{year}
+                and year = #{year}
             </if>
             <if test="grade != null and grade != ''">
                 and grade = #{grade}
