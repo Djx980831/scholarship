@@ -40,7 +40,7 @@
     </select>
 
     <select id="isExistMobile" resultType="integer">
-        select userId from user where mobile = #{mobile}
+        select id from user where mobile = #{mobile}
     </select>
 
     <select id="login" resultType="com.example.demo.vo.response.UserVO">
