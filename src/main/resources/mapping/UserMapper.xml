@@ -28,7 +28,7 @@
     </update>
 
     <update id="updateMobileByStudentId" parameterType="com.example.demo.entity.User">
-        update user set mobile = #{mobile}, updateTime = now() where studentId = #{studentId};
+        update user set mobile = #{mobile}, updateTime = now() where studentId = #{studentId}
     </update>
 
     <select id="getUserByMobile" resultType="integer">
