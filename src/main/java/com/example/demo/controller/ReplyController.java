@@ -29,7 +29,7 @@ public class ReplyController {
     private ReplyService service;
 
     @PostMapping("/addReplyByCommentId")
-    public RpcResponse<Integer> addReplyByCommentId(Integer commentId, String reply, Integer replyUserId, String replyUserName) {
+    public RpcResponse<Integer> addReplyByCommentId(Integer commentId, String reply, Integer replyUserId, String replyUserName, Integer role) {
         if (!ParamUtil.checkNumbers(commentId)) {
             return RpcResponse.error(REPLY_COMMENTID_IS_EMPTY);
         }
@@ -39,8 +39,10 @@ public class ReplyController {
         if (!ParamUtil.checkString(replyUserName)) {
             return RpcResponse.error(REPLY_REPLYUSERNAME_IS_EMPTY);
         }
-
-        return RpcResponse.success(service.addReplyByCommentId(commentId, reply, replyUserId, replyUserName));
+        if (role == 1) {
+            return RpcResponse.success(service.addReplyByCommentId(commentId, reply, replyUserId, replyUserName));
+        }
+        return RpcResponse.error(REPLY_QUANXIAN_ERROR);
     }
 
     @PostMapping("/deleteReplyById")
