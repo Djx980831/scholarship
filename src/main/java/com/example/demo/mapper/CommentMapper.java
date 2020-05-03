@@ -11,7 +11,7 @@ public interface CommentMapper {
 
     Integer addComment(CommentVORequest request);
 
-    Integer updateComment(CommentVORequest request);
+    Integer deleteComment(CommentVORequest request);
 
     List<Comment> getAllComment(CommentVORequest request);
 

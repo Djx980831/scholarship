@@ -25,9 +25,5 @@ public class CommentVO {
         private String userName;
         private String comment;
         private String createTime;
-        private Integer flag;
-        private String reply;
-        private String replyUserName;
-        private String replyTime;
     }
 }

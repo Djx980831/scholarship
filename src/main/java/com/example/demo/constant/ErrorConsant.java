@@ -111,4 +111,19 @@ public class ErrorConsant {
 
     public static final ErrorInfo ED_PARAM_IS_NOT_ENOUGH = new ErrorInfo(603, "缺少奖学金类型或年级");
 
+
+    /*
+    回复错误代码
+     */
+
+    public static final ErrorInfo REPLY_COMMENTID_IS_EMPTY = new ErrorInfo(701, "缺少评论id");
+
+    public static final ErrorInfo REPLY_REPLYID_IS_EMPTY= new ErrorInfo(702, "缺少回复id");
+
+    public static final ErrorInfo REPLY_REPLY_IS_EMPTY= new ErrorInfo(703, "缺少回复内容");
+
+    public static final ErrorInfo REPLY_REPLYUSERNAME_IS_EMPTY= new ErrorInfo(704, "缺少回复用户名");
+
+    public static final ErrorInfo REPLY_LIMIT_IS_EMPTY= new ErrorInfo(705, "缺少分页信息");
+
 }

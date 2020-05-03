@@ -48,7 +48,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public NoticeVO getAllNotice(Integer nowPage, Integer pageSize) {
-        List<Notice> noticeList = mapper.getAllNotice(nowPage - 1, pageSize);
+        List<Notice> noticeList = mapper.getAllNotice((nowPage - 1) * pageSize, pageSize);
         int count = mapper.getCount();
 
         NoticeVO noticeVO = new NoticeVO();

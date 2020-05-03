@@ -36,21 +36,18 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Integer updateComment(Integer id, String reply, String replyUserName, Integer flag) {
+    public Integer deleteComment(Integer id) {
         CommentVORequest request = new CommentVORequest();
         request.setId(id);
-        request.setReply(reply);
-        request.setReplyUserName(replyUserName);
-        request.setFlag(flag);
 
-        mapper.updateComment(request);
+        mapper.deleteComment(request);
         return id;
     }
 
     @Override
     public CommentVO getAllComment(Integer nowPage, Integer pageSize) {
         CommentVORequest request = new CommentVORequest();
-        request.setNowPage(nowPage - 1);
+        request.setNowPage((nowPage - 1) * pageSize);
         request.setPageSize(pageSize);
 
         List<Comment> commentList = mapper.getAllComment(request);
@@ -65,12 +62,6 @@ public class CommentServiceImpl implements CommentService {
             vo.setComment(comment.getComment());
             vo.setId(comment.getId());
             vo.setCreateTime(comment.getCreateTime().toString().substring(0, 10));
-            if (comment.getReply() != null) {
-                vo.setReplyUserName(comment.getReplyUserName());
-                vo.setReplyTime(comment.getReplyTime().toString().substring(0, 10));
-                vo.setReply(comment.getReply());
-            }
-
             commentVoList.add(vo);
         }
 
@@ -95,11 +86,6 @@ public class CommentServiceImpl implements CommentService {
         vo.setComment(comment.getComment());
         vo.setId(comment.getId());
         vo.setCreateTime(comment.getCreateTime().toString().substring(0, 10));
-        if (comment.getReply() != null) {
-            vo.setReplyUserName(comment.getReplyUserName());
-            vo.setReplyTime(comment.getReplyTime().toString().substring(0, 10));
-            vo.setReply(comment.getReply());
-        }
 
         return vo;
     }

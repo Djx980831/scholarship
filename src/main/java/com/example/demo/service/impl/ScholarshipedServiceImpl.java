@@ -55,7 +55,7 @@ public class ScholarshipedServiceImpl implements ScholarshipedService {
         request.setMajor(major);
         request.setType(type);
         request.setSortKind(sortKind);
-        request.setNowPage(nowPage - 1);
+        request.setNowPage((nowPage - 1) * pageSize);
         request.setPageSize(pageSize);
 
         List<Scholarshiped> scholarshipedList = mapper.getList(request);
@@ -113,7 +113,7 @@ public class ScholarshipedServiceImpl implements ScholarshipedService {
         request.setGrade(grade);
         request.setType(type);
         request.setSortKind(sortKind);
-        request.setNowPage(nowPage - 1);
+        request.setNowPage((nowPage - 1) * pageSize);
         request.setPageSize(pageSize);
 
         List<Scholarshiped> scholarshipedList = mapper.getScholarshipedList(request);

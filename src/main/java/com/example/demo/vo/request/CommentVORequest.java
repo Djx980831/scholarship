@@ -15,8 +15,6 @@ public class CommentVORequest {
     private String userName;
     private String comment;
     private Integer flag;
-    private String reply;
-    private String replyUserName;
     private Integer nowPage;
     private Integer pageSize;
 }

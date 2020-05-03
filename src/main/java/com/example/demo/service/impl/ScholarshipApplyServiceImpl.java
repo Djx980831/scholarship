@@ -77,7 +77,7 @@ public class ScholarshipApplyServiceImpl implements ScholarshipApplyService {
         request.setUserName(userName);
         request.setType(type);
         request.setTime(time);
-        request.setNowPage(nowPage - 1);
+        request.setNowPage((nowPage - 1) * pageSize);
         request.setPageSize(pageSize);
 
         List<ScholarshipApply> applyList = mapper.getApplyList(request);

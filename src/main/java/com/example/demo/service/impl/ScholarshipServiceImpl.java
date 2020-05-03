@@ -46,7 +46,7 @@ public class ScholarshipServiceImpl implements ScholarshipService {
 
     @Override
     public ScholarshipVO getAllScholarship(Integer nowPage, Integer pageSize) {
-        List<Scholarship> scholarshipList = mapper.getAllScholarship(nowPage - 1, pageSize);
+        List<Scholarship> scholarshipList = mapper.getAllScholarship((nowPage - 1) * pageSize, pageSize);
         Integer count = mapper.getCount();
 
         ScholarshipVO scholarshipVO = new ScholarshipVO();

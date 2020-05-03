@@ -34,12 +34,12 @@ public class CommentController {
         return RpcResponse.success(service.addComment(userName, comment));
     }
 
-    @PostMapping("/updateComment")
-    public RpcResponse<Integer> updateComment(Integer id, String reply, String replyUserName, Integer flag) {
+    @PostMapping("/deleteComment")
+    public RpcResponse<Integer> deleteComment(Integer id) {
         if (!ParamUtil.checkNumbers(id)) {
             return RpcResponse.error(COMMENT_ID_IS_EMPTY);
         }
-        return RpcResponse.success(service.updateComment(id, reply, replyUserName, flag));
+        return RpcResponse.success(service.deleteComment(id));
     }
 
     @PostMapping("/getAllComment")

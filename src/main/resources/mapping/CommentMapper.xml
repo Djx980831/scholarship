@@ -3,21 +3,12 @@
 <mapper namespace="com.example.demo.mapper.CommentMapper">
 
     <insert id="addComment" parameterType="com.example.demo.vo.request.CommentVORequest" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        insert into comment values (null, #{userName}, #{comment}, now(), 1, null, null, null)
+        insert into comment values (null, #{userName}, #{comment}, 1, now(), now())
     </insert>
 
-    <update id="updateComment" parameterType="com.example.demo.vo.request.CommentVORequest">
-        update comment set replyTime = now()
-        <if test="replyUserName != null and replyUserName != ''">
-            , replyUserName = #{replyUserName}
-        </if>
-        <if test="reply != null and reply != ''">
-            , reply = #{reply}
-        </if>
-        <if test="flag != null and flag != ''">
-            , flag = #{flag}
-        </if>
-         where id = #{id}
+    <update id="deleteComment" parameterType="com.example.demo.vo.request.CommentVORequest">
+        update comment set updateTime = now(), flag = 0
+        where id = #{id}
     </update>
 
     <select id="getAllComment" parameterType="com.example.demo.vo.request.CommentVORequest" resultType="com.example.demo.entity.Comment">

@@ -18,7 +18,4 @@ public class Comment {
     private String comment;
     private Timestamp createTime;
     private Integer flag;
-    private String reply;
-    private String replyUserName;
-    private Timestamp replyTime;
 }

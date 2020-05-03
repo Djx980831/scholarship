@@ -6,7 +6,7 @@ public interface CommentService {
 
     Integer addComment(String userName, String comment);
 
-    Integer updateComment(Integer id, String reply, String replyUserName, Integer flag);
+    Integer deleteComment(Integer id);
 
     CommentVO getAllComment(Integer nowPage, Integer pageSize);
 
