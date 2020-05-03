@@ -26,8 +26,9 @@ public class CommentServiceImpl implements CommentService {
     private CommentMapper mapper;
 
     @Override
-    public Integer addComment(String userName, String comment) {
+    public Integer addComment(Integer commentUserId, String userName, String comment) {
         CommentVORequest request = new CommentVORequest();
+        request.setCommentUserId(commentUserId);
         request.setComment(comment);
         request.setUserName(userName);
 
@@ -61,6 +62,7 @@ public class CommentServiceImpl implements CommentService {
             vo.setUserName(comment.getUserName());
             vo.setComment(comment.getComment());
             vo.setId(comment.getId());
+            vo.setCommentUserId(comment.getCommentUserId());
             vo.setCreateTime(comment.getCreateTime().toString().substring(0, 10));
             commentVoList.add(vo);
         }
@@ -86,6 +88,7 @@ public class CommentServiceImpl implements CommentService {
         vo.setComment(comment.getComment());
         vo.setId(comment.getId());
         vo.setCreateTime(comment.getCreateTime().toString().substring(0, 10));
+        vo.setCommentUserId(comment.getCommentUserId());
 
         return vo;
     }

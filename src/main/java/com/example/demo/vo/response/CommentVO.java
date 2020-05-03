@@ -22,6 +22,7 @@ public class CommentVO {
     @Data
     public static class CommentVo{
         private Integer id;
+        private Integer commentUserId;
         private String userName;
         private String comment;
         private String createTime;

@@ -99,7 +99,9 @@ public class ErrorConsant {
 
     public static final ErrorInfo COMMENT_IS_NOT_EXIST= new ErrorInfo(504, "该留言不存在");
 
-    public static final ErrorInfo COMMENT_IS_ALL_EMPTY= new ErrorInfo(504, "没有任何留言");
+    public static final ErrorInfo COMMENT_IS_ALL_EMPTY = new ErrorInfo(504, "没有任何留言");
+
+    public static final ErrorInfo COMMENT_QUANXIAN_ERROR= new ErrorInfo(505, "没有权限进行删除操作");
 
     /*
     奖学金错误代码
@@ -125,5 +127,7 @@ public class ErrorConsant {
     public static final ErrorInfo REPLY_REPLYUSERNAME_IS_EMPTY= new ErrorInfo(704, "缺少回复用户名");
 
     public static final ErrorInfo REPLY_LIMIT_IS_EMPTY= new ErrorInfo(705, "缺少分页信息");
+
+    public static final ErrorInfo REPLY_QUANXIAN_ERROR= new ErrorInfo(706, "没有权限进行删除操作");
 
 }

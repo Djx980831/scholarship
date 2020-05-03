@@ -22,6 +22,7 @@ public class ReplyVO {
     public static class ReplyVo{
         private Integer id;
         private Integer commentId;
+        private Integer replyUserId;
         private String replyUserName;
         private String reply;
         private String createTime;

@@ -3,7 +3,7 @@
 <mapper namespace="com.example.demo.mapper.CommentMapper">
 
     <insert id="addComment" parameterType="com.example.demo.vo.request.CommentVORequest" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        insert into comment values (null, #{userName}, #{comment}, 1, now(), now())
+        insert into comment values (null, #{commentUserId}, #{userName}, #{comment}, 1, now(), now())
     </insert>
 
     <update id="deleteComment" parameterType="com.example.demo.vo.request.CommentVORequest">

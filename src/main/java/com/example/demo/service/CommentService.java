@@ -4,7 +4,7 @@ import com.example.demo.vo.response.CommentVO;
 
 public interface CommentService {
 
-    Integer addComment(String userName, String comment);
+    Integer addComment(Integer commentUserId, String userName, String comment);
 
     Integer deleteComment(Integer id);
 

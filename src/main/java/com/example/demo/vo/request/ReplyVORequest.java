@@ -13,6 +13,7 @@ import lombok.Data;
 public class ReplyVORequest {
     private Integer id;
     private Integer commentId;
+    private Integer replyUserId;
     private String replyUserName;
     private String reply;
     private Integer flag;

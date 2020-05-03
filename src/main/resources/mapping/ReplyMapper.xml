@@ -3,7 +3,7 @@
 <mapper namespace="com.example.demo.mapper.ReplyMapper">
 
     <insert id="addReplyByCommentId" parameterType="com.example.demo.vo.request.ReplyVORequest" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        insert into reply values (null, #{commentId}, #{reply}, #{replyUserName}, 1, now(), now())
+        insert into reply values (null, #{commentId}, #{reply}, #{replyUserId}, #{replyUserName}, 1, now(), now())
     </insert>
 
     <update id="deleteReplyById" parameterType="com.example.demo.vo.request.ReplyVORequest">
@@ -18,5 +18,9 @@
 
     <select id="getCountByCommentId" resultType="integer">
         select count(*) from reply where flag = 1 and commentId = #{commentId}
+    </select>
+
+    <select id="getReplyByReplyId" resultType="com.example.demo.entity.Reply">
+        select * from reply where flag = 1 and id = #{id}
     </select>
 </mapper>

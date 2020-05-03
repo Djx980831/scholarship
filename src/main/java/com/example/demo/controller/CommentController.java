@@ -27,19 +27,24 @@ public class CommentController {
     private CommentService service;
 
     @PostMapping("/addComment")
-    public RpcResponse<Integer> addComment(String userName, String comment) {
+    public RpcResponse<Integer> addComment(Integer commentUserId, String userName, String comment) {
         if (!ParamUtil.checkString(comment)) {
             return RpcResponse.error(COMMENT_IS_EMPTY);
         }
-        return RpcResponse.success(service.addComment(userName, comment));
+        return RpcResponse.success(service.addComment(commentUserId, userName, comment));
     }
 
     @PostMapping("/deleteComment")
-    public RpcResponse<Integer> deleteComment(Integer id) {
+    public RpcResponse<Integer> deleteComment(Integer id, Integer role, Integer userId) {
         if (!ParamUtil.checkNumbers(id)) {
             return RpcResponse.error(COMMENT_ID_IS_EMPTY);
         }
-        return RpcResponse.success(service.deleteComment(id));
+        CommentVO.CommentVo vo = service.getCommentById(id);
+        if (role == 1 || vo.getCommentUserId() == userId) {
+            return RpcResponse.success(service.deleteComment(id));
+        }
+
+        return RpcResponse.error(COMMENT_QUANXIAN_ERROR);
     }
 
     @PostMapping("/getAllComment")

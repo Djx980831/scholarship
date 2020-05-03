@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import lombok.Data;
 
+import java.sql.Timestamp;
+
 /**
  * @param
  * @Description TODO
@@ -14,5 +16,7 @@ public class Reply {
     private Integer id;
     private Integer commentId;
     private String reply;
+    private Integer replyUserId;
     private String replyUserName;
+    private Timestamp createTime;
 }

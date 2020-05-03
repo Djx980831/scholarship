@@ -12,6 +12,7 @@ import lombok.Data;
 @Data
 public class CommentVORequest {
     private Integer id;
+    private Integer commentUserId;
     private String userName;
     private String comment;
     private Integer flag;

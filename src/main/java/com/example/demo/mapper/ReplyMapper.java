@@ -16,4 +16,6 @@ public interface ReplyMapper {
     List<Reply> getAllReply(ReplyVORequest replyVORequest);
 
     Integer getCountByCommentId(ReplyVORequest replyVORequest);
+
+    Reply getReplyByReplyId(Integer id);
 }

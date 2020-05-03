@@ -26,11 +26,12 @@ public class ReplyServiceImpl implements ReplyService {
     private ReplyMapper mapper;
 
     @Override
-    public Integer addReplyByCommentId(Integer commentId, String reply, String replyUserName) {
+    public Integer addReplyByCommentId(Integer commentId, String reply, Integer replyUserId, String replyUserName) {
         ReplyVORequest request = new ReplyVORequest();
         request.setCommentId(commentId);
         request.setReply(reply);
         request.setReplyUserName(replyUserName);
+        request.setReplyUserId(replyUserId);
 
         mapper.addReplyByCommentId(request);
 
@@ -66,7 +67,8 @@ public class ReplyServiceImpl implements ReplyService {
             vo.setCommentId(reply.getCommentId());
             vo.setReply(reply.getReply());
             vo.setReplyUserName(reply.getReplyUserName());
-            vo.setCreateTime(reply.getReply());
+            vo.setCreateTime(reply.getCreateTime().toString().substring(0, 10));
+            vo.setReplyUserId(reply.getReplyUserId());
 
             replyVoList.add(vo);
         }
@@ -78,5 +80,10 @@ public class ReplyServiceImpl implements ReplyService {
         replyVO.setReplyVoList(replyVoList);
 
         return replyVO;
+    }
+
+    @Override
+    public Reply getReplyByReplyId(Integer id) {
+        return mapper.getReplyByReplyId(id);
     }
 }

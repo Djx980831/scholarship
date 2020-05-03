@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Reply;
 import com.example.demo.service.CommentService;
 import com.example.demo.service.ReplyService;
 import com.example.demo.util.ParamUtil;
@@ -28,7 +29,7 @@ public class ReplyController {
     private ReplyService service;
 
     @PostMapping("/addReplyByCommentId")
-    public RpcResponse<Integer> addReplyByCommentId(Integer commentId, String reply, String replyUserName) {
+    public RpcResponse<Integer> addReplyByCommentId(Integer commentId, String reply, Integer replyUserId, String replyUserName) {
         if (!ParamUtil.checkNumbers(commentId)) {
             return RpcResponse.error(REPLY_COMMENTID_IS_EMPTY);
         }
@@ -39,16 +40,19 @@ public class ReplyController {
             return RpcResponse.error(REPLY_REPLYUSERNAME_IS_EMPTY);
         }
 
-        return RpcResponse.success(service.addReplyByCommentId(commentId, reply, replyUserName));
+        return RpcResponse.success(service.addReplyByCommentId(commentId, reply, replyUserId, replyUserName));
     }
 
     @PostMapping("/deleteReplyById")
-    public RpcResponse<Integer> deleteReplyById(Integer id) {
+    public RpcResponse<Integer> deleteReplyById(Integer id, Integer role, Integer userId) {
         if (!ParamUtil.checkNumbers(id)) {
             return RpcResponse.error(REPLY_REPLYID_IS_EMPTY);
         }
-
-        return RpcResponse.success(service.deleteReplyById(id));
+        Reply reply = service.getReplyByReplyId(id);
+        if (role == 1 || reply.getReplyUserId() == userId) {
+            return RpcResponse.success(service.deleteReplyById(id));
+        }
+        return RpcResponse.error(REPLY_QUANXIAN_ERROR);
     }
 
     @PostMapping("/getAllReply")

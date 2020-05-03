@@ -140,10 +140,10 @@ public class UserController {
             return RpcResponse.error(LOGIN_ERROR);
         }
         session.setAttribute("userVO", userVO);
-        Cookie id = new Cookie("id", userVO.getId().toString());
-        id.setPath("/");
-        id.setMaxAge(24 * 60 * 60);
-        response.addCookie(id);
+        Cookie userId = new Cookie("userId", userVO.getId().toString());
+        userId.setPath("/");
+        userId.setMaxAge(24 * 60 * 60);
+        response.addCookie(userId);
 
         Cookie studentId = new Cookie("studentId", userVO.getStudentId());
         studentId.setPath("/");
