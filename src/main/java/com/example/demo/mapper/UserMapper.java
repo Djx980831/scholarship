@@ -29,4 +29,6 @@ public interface UserMapper {
     String getQuestionByStudentId(String studentId);
 
     String getAnswerByStudentId(String studentId, String answer);
+
+    String deleteUserByStudentId(String studentId);
 }

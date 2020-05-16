@@ -51,22 +51,6 @@
         select * from user where studentId = #{studentIdOrMobile} or mobile = #{studentIdOrMobile}
     </select>
 
-    <update id="updateUserById" parameterType="user">
-        update user
-        <trim prefix="set" prefixOverrides=",">
-            <if test="userName != null and userName != ''">
-                ,userName = #{userName}
-            </if>
-            <if test="password != null and password != ''">
-                ,password = #{password}
-            </if>
-            <if test="realName != null and realName !=''">
-                ,realName = #{realName}
-            </if>
-        </trim>
-        where id = #{id}
-    </update>
-
     <select id="getQuestionByStudentId" resultType="string">
         select question from user where studentId = #{studentId}
     </select>
@@ -74,6 +58,10 @@
     <select id="getAnswerByStudentId" resultType="string">
         select studentId from user where studentId = #{studentId} and answer = #{answer}
     </select>
+
+    <delete id="deleteUserByStudentId" parameterType="string">
+        delete from user where studentId = #{studentId}
+    </delete>
 
     <!--<insert id="insert" parameterType="com.example.entity.User">
         insert into User (userId, userName, phone,

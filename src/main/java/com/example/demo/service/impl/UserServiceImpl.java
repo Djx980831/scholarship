@@ -20,6 +20,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUser(String studentId, String userName, Integer sex, Integer role, String mobile, String grade, String major, String gradeClass, String password, String question, String answer) {
 
+        if (userMapper.isExistStudentId(studentId) != null) {
+            userMapper.deleteUserByStudentId(studentId);
+        }
         User user = new User();
         user.setStudentId(studentId);
         user.setUserName(userName);
